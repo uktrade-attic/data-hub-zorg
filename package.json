@@ -1,0 +1,40 @@
+{
+  "name": "data-hub-zorg",
+  "version": "0.0.1",
+  "description": "Data hub investment api",
+  "author": "Zac Tolley <zac@thetolleys.com>",
+  "license": "MIT",
+  "engines": {
+    "node": "6.9.4"
+  },
+  "main": "src/server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uktrade/data-hub-zorg"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.14.0",
+    "express-validator": "^3.0.0",
+    "knex": "^0.12.6",
+    "moment": "^2.17.1",
+    "pg": "^6.1.1",
+    "winston": "^2.3.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0",
+    "sinon": "^1.17.6",
+    "sinon-chai": "^2.8.0",
+    "standard": "^8.6.0"
+  },
+  "scripts": {
+    "start": "node --use-strict src/server.js",
+    "develop": "nodemon --use-strict src/app.js",
+    "test": "mocha --require test/common.js --ui bdd test/**/*.test.js",
+    "lint": "npm run lint:js",
+    "lint:js": "eslint src/**/*.js"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "extends": ["standard"],
+  "globals": {
+    "afterEach": true,
+    "assert": true,
+    "beforeEach": true,
+    "describe": true,
+    "es": true,
+    "expect": true,
+    "it": true,
+    "require": true
+  }
+}
