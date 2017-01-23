@@ -3,3 +3,8 @@ machine:
     version: 6.9.4
   environment:
     DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
+test:
+  override:
+    - mocha test --reporter mocha-junit-reporter --require test/common.js --ui bdd test/**/*.test.js:
+        environment:
+          MOCHA_FILE: $CIRCLE_TEST_REPORTS/junit/test-results.xml
