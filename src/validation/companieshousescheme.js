@@ -1,25 +1,25 @@
 module.exports = {
-  'title': {
+  'company_)number': {
     notEmpty: {
-      errorMessage: 'You must provide a title'
+      errorMessage: 'You must provide a company number'
     },
     isLength: {
       options: [{ max: 100 }],
       errorMessage: 'Must be between 2 and 100 chars long'
     },
-    errorMessage: 'Invalid title'
+    errorMessage: 'Invalid company number'
   },
-  'description': {
+  'name': {
     notEmpty: {
-      errorMessage: 'You must provide a description'
+      errorMessage: 'You must provide a name'
     },
     isLength: {
-      options: [{ max: 255 }],
-      errorMessage: 'Must be between 2 and 255 chars long' // Error message for the validator, takes precedent over parameter message
+      options: [{ max: 100 }],
+      errorMessage: 'Must be between 2 and 100 chars long'
     },
-    errorMessage: 'Invalid description'
+    errorMessage: 'Invalid name'
   },
-  'address_1': {
+  'registered_address_1': {
     notEmpty: true,
     isLength: {
       options: [{ max: 255 }],
@@ -27,7 +27,7 @@ module.exports = {
     },
     errorMessage: 'Invalid address'
   },
-  'address_2': {
+  'registered_address_2': {
     optional: true,
     isLength: {
       options: [{ min: 2, max: 255 }],
@@ -35,7 +35,7 @@ module.exports = {
     },
     errorMessage: 'Invalid address'
   },
-  'town': {
+  'registered_address_town': {
     optional: true,
     isLength: {
       options: [{ max: 255 }],
@@ -43,7 +43,7 @@ module.exports = {
     },
     errorMessage: 'Invalid address'
   },
-  'county': {
+  'registered_address_county': {
     optional: true,
     isLength: {
       options: [{ max: 255 }],
@@ -51,19 +51,11 @@ module.exports = {
     },
     errorMessage: 'Invalid address'
   },
-  'zipcode': {
+  'registered_address_postcode': {
     notEmpty: true,
     isLength: {
-      options: [{ max: 255 }],
-      errorMessage: 'Must be between 2 and 255 chars long' // Error message for the validator, takes precedent over parameter message
-    },
-    errorMessage: 'Invalid address'
-  },
-  'country': {
-    notEmpty: true,
-    isLength: {
-      options: [{ max: 20 }],
-      errorMessage: 'Must be between 2 and 20 chars long' // Error message for the validator, takes precedent over parameter message
+      options: [{ max: 10 }],
+      errorMessage: 'Must be between 2 and 10 chars long' // Error message for the validator, takes precedent over parameter message
     },
     errorMessage: 'Invalid address'
   }
