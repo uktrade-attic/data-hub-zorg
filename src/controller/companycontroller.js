@@ -1,7 +1,7 @@
 const express = require('express')
 const winston = require('winston')
 const generateUUID = require('../lib/uuid').generateUUID
-const companyRepository = require('../repository/companyrepository')
+const companyRepository = require('../db/companyrepository')
 const companyValidationSchema = require('../validation/companyscheme')
 
 const router = express.Router()
