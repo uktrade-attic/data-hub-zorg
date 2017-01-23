@@ -36,6 +36,8 @@
     "develop": "nodemon --use-strict src/app.js",
     "test": "mocha --require test/common.js --ui bdd test/**/*.test.js",
     "lint": "npm run lint:js",
-    "lint:js": "eslint src/**/*.js"
+    "lint:js": "eslint src/**/*.js",
+    "migrate": "knex migrate:latest",
+    "heroku-postbuild": "knex migrate:latest && knex seed:run"
   }
 }
