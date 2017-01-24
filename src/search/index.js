@@ -32,7 +32,7 @@ function indexCompaniesHouseCompany (company) {
     client.index({
       index: INDEX_NAME,
       id: company.id,
-      type: 'company_company',
+      type: 'companieshouse_company',
       body: company
     }, function (error, resp) {
       if (error) {
@@ -46,31 +46,49 @@ function indexCompaniesHouseCompany (company) {
 }
 
 function indexAllCompanies () {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     companyRepository.getCompanies()
       .then((records) => {
-        const promises = records
-          .filter(record => (record.company_number !== null || record.company_number.length > 0))
-          .map((record) => {
-            return indexCompany(record)
-          })
+        let body = []
+        records.forEach((record) => {
+          body.push({ index: {
+            _index: INDEX_NAME,
+            _id: record.id,
+            _type: 'company_company'
+          }})
+          body.push(record)
+        })
 
-        resolve(Promise.all(promises))
+        client.bulk({ body }, function (err, resp) {
+          if (err) {
+            return reject(err)
+          }
+          return resolve(resp)
+        })
       })
   })
 }
 
 function indexAllCompaniesHouse () {
-  return new Promise((resolve) => {
-    let promises = []
+  return new Promise((resolve, reject) => {
     companiesHouseRepository.getOrphanCH()
       .then((records) => {
+        let body = []
         records.forEach((record) => {
-          winston.debug('index:', record)
-          promises.push(indexCompaniesHouseCompany(record))
+          body.push({ index: {
+            _index: INDEX_NAME,
+            _id: record.company_number,
+            _type: 'companieshouse_company'
+          }})
+          body.push(record)
         })
 
-        resolve(Promise.all(promises))
+        client.bulk({ body }, function (err, resp) {
+          if (err) {
+            return reject(err)
+          }
+          return resolve(resp)
+        })
       })
   })
 }
