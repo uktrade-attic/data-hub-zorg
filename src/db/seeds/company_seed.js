@@ -3,18 +3,35 @@ const ImportCH = require('../importch')
 const ESIndex = require('../../search/')
 
 function clear (knex) {
-  return Promise.all([
-    knex('company').del(),
-    knex('companieshouse').del(),
-    knex('country').del(),
-    knex('businesstype').del(),
-    knex('employeerange').del(),
-    knex('turnoverrange').del(),
-    knex('advisor').del(),
-    knex('region').del(),
-    knex('sector').del(),
-    ESIndex.deleteIndex()
-  ])
+
+  return knex('company').del()
+    .then(() => {
+      return knex('companieshouse').del()
+    })
+    .then(() => {
+      return knex('country').del()
+    })
+    .then(() => {
+      return knex('businesstype').del()
+    })
+    .then(() => {
+      return knex('employeerange').del()
+    })
+    .then(() => {
+      return knex('turnoverrange').del()
+    })
+    .then(() => {
+      return knex('advisor').del()
+    })
+    .then(() => {
+      return knex('region').del()
+    })
+    .then(() => {
+      return knex('sector').del()
+    })
+    .then(() => {
+      return ESIndex.deleteIndex()
+    })
 }
 
 /* Seed the DB and Elastic search
@@ -28,7 +45,7 @@ exports.seed = function (knex, Promise) {
   const csvPath = path.join(__dirname, '..', '..', '..', 'data', 'marriot_ch.csv')
   const chrecords = ImportCH.parseFile(csvPath)
 
-  return clear(knex, Promise)
+  return clear(knex)
     .then(() => {
       return knex('sector').insert({
         id: '35b6db3e-515c-4497-8020-3b1aea0c5956',
