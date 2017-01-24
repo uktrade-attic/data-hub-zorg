@@ -1,4 +1,5 @@
 process.env.NODE_ENV = 'test'
+process.env.ESINDEX = 'datahubtest'
 global.chai = require('chai')
 global.chaiHttp = require('chai-http')
 global.server = require('../src/server')

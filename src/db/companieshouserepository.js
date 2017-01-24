@@ -28,4 +28,11 @@ function deleteCompany (companyNumber) {
   return Companies().where('company_number', companyNumber).del()
 }
 
-module.exports = { getCompany, getCompanies, addCompany, deleteCompany, updateCompany }
+function getOrphanCH () {
+  return knex.select('*')
+    .from('companieshouse')
+    .leftJoin('company', 'companieshouse.company_number', 'company.company_number')
+    .whereNull('company.company_number')
+}
+
+module.exports = { getCompany, getCompanies, addCompany, deleteCompany, updateCompany, getOrphanCH }

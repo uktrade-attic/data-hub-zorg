@@ -75,7 +75,7 @@ exports.seed = function (knex, Promise) {
       return knex('company').insert({
         id: '35b6db3e-515c-4497-8020-3b1aea0c59ff',
         company_number: '123456789',
-        name: 'Fred Smith Consultants',
+        name: 'Fred Smith Test',
         registered_address_1: 'Fred Bloggs House',
         registered_address_town: 'Frampworth',
         registered_address_county: 'Berkshire',
@@ -91,7 +91,7 @@ exports.seed = function (knex, Promise) {
       return knex('company').insert({
         id: '35b6db3e-515c-4497-8020-3b1aea0c69ff',
         company_number: '123456789',
-        name: 'Jane Green Consultants',
+        name: 'Jane Green Test',
         registered_address_1: 'Jane Green House',
         registered_address_town: 'Frampworth',
         registered_address_county: 'Berkshire',

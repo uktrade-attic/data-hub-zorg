@@ -1,14 +1,10 @@
-'use strict';
-
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3010
 
 module.exports = {
   env: process.env.NODE_ENV,
   port: port,
-  api: {
-    baseUrl: process.env.API_URL,
-    authUrl: process.env.AUTH_URL,
-    clientId: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET
+  search: {
+    hosts: process.env.BONSAI_URL || 'http://localhost:9200/',
+    index: process.env.ESINDEX || 'datahub'
   }
-};
+}

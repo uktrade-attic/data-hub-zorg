@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   test: {
     client: 'pg',
@@ -8,35 +10,35 @@ module.exports = {
       database: 'investment-test'
     },
     migrations: {
-      directory: __dirname + '/src/db/migrations'
+      directory: path.join(__dirname, 'src', 'db', 'migrations')
     },
     seeds: {
-      directory: __dirname + '/test/db/seeds/test'
+      directory: path.join(__dirname, 'test', 'db', 'seeds')
     }
   },
   development: {
     client: 'pg',
-    connection: {
+    connection: process.env.DATABASE_URL || {
       host: '127.0.0.1',
       user: 'datahub',
       password: 'password',
       database: 'investment'
     },
     migrations: {
-      directory: __dirname + '/src/db/migrations'
+      directory: path.join(__dirname, 'src', 'db', 'migrations')
     },
     seeds: {
-      directory: __dirname + '/src/db/seeds/development'
+      directory: path.join(__dirname, 'src', 'db', 'seeds')
     }
   },
   production: {
     client: 'pg',
     connection: `${process.env.DATABASE_URL}?ssl=true`,
     migrations: {
-      directory: __dirname + '/src/db/migrations'
+      directory: path.join(__dirname, 'src', 'db', 'migrations')
     },
     seeds: {
-      directory: __dirname + '/src/db/seeds/production'
+      directory: path.join(__dirname, 'src', 'db', 'seeds')
     }
   }
 }

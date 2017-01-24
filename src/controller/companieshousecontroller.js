@@ -1,6 +1,6 @@
 const express = require('express')
 const winston = require('winston')
-const companiesHouseRepository = require('../repository/companieshouserepository')
+const companiesHouseRepository = require('../db/companieshouserepository')
 const companiesHouseValidationSchema = require('../validation/companieshousescheme')
 
 const router = express.Router()
