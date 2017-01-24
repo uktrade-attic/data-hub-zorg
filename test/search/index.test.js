@@ -2,7 +2,8 @@
 const search = require('../../src/search')
 
 describe('Search Index', () => {
-  beforeEach((done) => {
+  beforeEach(function (done) {
+    this.timeout(10000)
     search.createIndex()
       .then((res) => {
         return search.indexCompany({
@@ -17,10 +18,14 @@ describe('Search Index', () => {
         })
       })
       .then(() => {
-        done()
+        console.log('Created Index')
+        setTimeout(function () {
+          done()
+        }, 5000)
       })
   })
-  afterEach((done) => {
+
+  afterEach(function (done) {
     search.deleteIndex()
       .then(() => {
         done()
@@ -28,12 +33,15 @@ describe('Search Index', () => {
   })
 
   describe('search', () => {
-    it('should find a record in the index', (done) => {
+    it('should find a record in the index', function (done) {
       search.search('Test')
         .then((results) => {
           expect(results.total).to.equal(1)
           expect(results.hits[0]._source.name).to.equal('Test 1 2 3')
           done()
+        })
+        .catch((error) => {
+          console.log(error)
         })
     })
   })
