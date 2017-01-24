@@ -1,3 +1,7 @@
+const path = require('path')
+const ImportCH = require('../importch')
+const ESIndex = require('../../search/')
+
 function clear (knex) {
   return Promise.all([
     knex('company').del(),
@@ -8,16 +12,27 @@ function clear (knex) {
     knex('turnoverrange').del(),
     knex('advisor').del(),
     knex('region').del(),
-    knex('sector').del()
+    knex('sector').del(),
+    ESIndex.deleteIndex()
   ])
 }
 
+/* Seed the DB and Elastic search
+   Insert metadata into the db
+   Create a fake CDMS company in the DB
+   Import a sub
+
+ */
+
 exports.seed = function (knex, Promise) {
+  const csvPath = path.join(__dirname, '..', '..', '..', 'data', 'marriot_ch.csv')
+  const chrecords = ImportCH.parseFile(csvPath)
+
   return clear(knex, Promise)
     .then(() => {
       return knex('sector').insert({
         id: '35b6db3e-515c-4497-8020-3b1aea0c5956',
-        name: 'Tech stuff'
+        name: 'Cleaning Services'
       })
     })
     .then(() => {
@@ -57,34 +72,34 @@ exports.seed = function (knex, Promise) {
       })
     })
     .then(() => {
-      return knex('companieshouse').insert({
-        company_number: '123456789',
-        name: 'Fred Smith Consultants',
-        registered_address_1: 'Fred Bloggs House',
-        registered_address_town: 'Frampworth',
-        registered_address_county: 'Berkshire',
-        registered_address_postcode: 'FB1 1FB',
-        registered_address_country: '35b6db3e-515c-4497-8020-3b1aea0c595d',
-        company_category: 'IT Stuff',
-        company_status: 'Active',
-        sic_code_1: '123412: IT THINGS',
-        incorporation_date: '01/01/2010'
-      })
+      return knex('companieshouse').insert(chrecords)
     })
     .then(() => {
       return knex('company').insert({
         id: '35b6db3e-515c-4497-8020-3b1aea0c59ff',
-        company_number: '123456789',
-        name: 'Fred Smith Consultants',
-        registered_address_1: 'Fred Bloggs House',
-        registered_address_town: 'Frampworth',
-        registered_address_county: 'Berkshire',
-        registered_address_postcode: 'FB1 1FB',
+        company_number: '08202257',
+        name: 'MARRIOT CLEANING SERVICES LIMITED',
+        registered_address_1: '51 HUGON ROAD',
+        registered_address_town: 'FULHAM',
+        registered_address_county: 'LONDON',
+        registered_address_postcode: 'SW6 3ER',
         registered_address_country: '35b6db3e-515c-4497-8020-3b1aea0c595d',
         business_type: '35b6db3e-515c-4497-8020-3b1aea0c595b',
         sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
         uk_region: '35b6db3e-515c-4497-8020-3b1aea0c5957'
       })
+    })
+    .then(() => {
+      console.log('Imported data -- calling create index')
+      return ESIndex.createIndex()
+    })
+    .then(() => {
+      console.log('index CH')
+      return ESIndex.indexAllCompaniesHouse()
+    })
+    .then(() => {
+      console.log('Index Companies')
+      return ESIndex.indexAllCompanies()
     })
 }

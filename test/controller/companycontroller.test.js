@@ -46,7 +46,7 @@ describe('Company API Routes', () => {
           expect(res).to.be.json
           expect(res.body).to.be.a('object')
           expect(res.body).to.have.property('name')
-          expect(res.body.name).to.equal('Fred Smith Consultants')
+          expect(res.body.name).to.equal('Fred Smith Test')
           done()
         })
     })
