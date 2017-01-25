@@ -29,7 +29,7 @@ function deleteCompany (companyNumber) {
 }
 
 function getOrphanCH () {
-  return knex.select('*')
+  return knex.select('companieshouse.*')
     .from('companieshouse')
     .leftJoin('company', 'companieshouse.company_number', 'company.company_number')
     .whereNull('company.company_number')
