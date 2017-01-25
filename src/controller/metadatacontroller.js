@@ -1,9 +1,23 @@
 const knex = require('../db/knex')
 
-module.exports = function (req, res) {
+function list (req, res) {
   const tableName = req.params.table
-  knex(tableName).select()
+  knex(tableName)
     .then((records) => {
       res.json(records)
     })
 }
+
+function value (req, res) {
+  const tableName = req.params.table
+  const id = req.params.id
+
+  knex(tableName)
+    .select('*')
+    .where(`${tableName}.id`, id)
+    .then((records) => {
+      res.json(records[0])
+    })
+}
+
+module.exports = { list, value }

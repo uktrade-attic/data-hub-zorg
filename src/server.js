@@ -16,7 +16,8 @@ app.use(locals)
 app.use('/company', require('./controller/companycontroller').router)
 app.use('/ch-company', require('./controller/companieshousecontroller').router)
 app.use('/search', require('./controller/searchcontroller'))
-app.get('/metadata/:table/', require('./controller/metadatacontroller'))
+app.get('/metadata/:table/', require('./controller/metadatacontroller').list)
+app.get('/metadata/:table/:id/', require('./controller/metadatacontroller').value)
 
 app.listen(config.port)
 module.exports = app
