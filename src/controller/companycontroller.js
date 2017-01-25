@@ -4,6 +4,7 @@ const generateUUID = require('../lib/uuid').generateUUID
 const companyRepository = require('../db/companyrepository')
 const companyValidationSchema = require('../validation/companyscheme')
 const contactRepository = require('../db/contactrepository')
+const investmentProjectRepository = require('../db/investmentprojectrepository')
 
 const router = express.Router()
 
@@ -107,10 +108,23 @@ function contacts (req, res, next) {
     })
 }
 
+function investmentProjects (req, res, next) {
+  investmentProjectRepository.getInvestmentProjectsForCompany(req.params.id)
+    .then((investmentProjects) => {
+      res.status(200).json(investmentProjects)
+    })
+    .catch((error) => {
+      winston.error(error)
+      next(error)
+    })
+}
+
 router.get('/', list)
 router.get('/:id/', get)
 router.post('/', post)
 router.put('/:id/', put)
 router.delete('/:id/', remove)
 router.get('/:id/contacts/', contacts)
+router.get('/:id/investmentprojects/', investmentProjects)
+
 module.exports = { router }
