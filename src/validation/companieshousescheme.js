@@ -1,5 +1,5 @@
 module.exports = {
-  'company_)number': {
+  'company_number': {
     notEmpty: {
       errorMessage: 'You must provide a company number'
     },

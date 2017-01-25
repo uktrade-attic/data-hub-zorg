@@ -1,16 +1,15 @@
 const express = require('express')
 const winston = require('winston')
 const generateUUID = require('../lib/uuid').generateUUID
-const companyRepository = require('../db/companyrepository')
-const companyValidationSchema = require('../validation/companyscheme')
 const contactRepository = require('../db/contactrepository')
+const contactValidationSchema = require('../validation/contactscheme')
 
 const router = express.Router()
 
 function list (req, res, next) {
-  companyRepository.getCompanies()
-    .then((companies) => {
-      res.status(200).json(companies)
+  contactRepository.getContacts()
+    .then((contacts) => {
+      res.status(200).json(contacts)
     })
     .catch((error) => {
       winston.error(error)
@@ -19,10 +18,10 @@ function list (req, res, next) {
 }
 
 function get (req, res, next) {
-  companyRepository.getCompany(req.params.id)
-    .then((company) => {
-      if (company) {
-        res.status(200).json(company)
+  contactRepository.getContact(req.params.id)
+    .then((contact) => {
+      if (contact) {
+        res.status(200).json(contact)
       } else {
         res.status(404).send()
       }
@@ -34,21 +33,21 @@ function get (req, res, next) {
 }
 
 function post (req, res, next) {
-  req.checkBody(companyValidationSchema)
+  req.checkBody(contactValidationSchema)
   req.getValidationResult()
     .then((result) => {
       if (!result.isEmpty()) {
         return res.status(400).json(result.mapped())
       }
 
-      const companyToAdd = Object.assign({}, req.body)
-      companyToAdd.id = generateUUID()
-      companyRepository.addCompany(companyToAdd)
+      const contactToAdd = Object.assign({}, req.body)
+      contactToAdd.id = generateUUID()
+      contactRepository.addContact(contactToAdd)
         .then((id) => {
-          return companyRepository.getCompany(id)
+          return contactRepository.getContact(id)
         })
-        .then((company) => {
-          res.status(200).json(company)
+        .then((contact) => {
+          res.status(200).json(contact)
         })
     })
     .catch((error) => {
@@ -58,18 +57,18 @@ function post (req, res, next) {
 }
 
 function put (req, res, next) {
-  req.checkBody(companyValidationSchema)
+  req.checkBody(contactValidationSchema)
   req.getValidationResult()
     .then((result) => {
       if (!result.isEmpty()) {
         return res.status(400).json(result.mapped())
       }
-      companyRepository.updateCompany(req.params.id, req.body)
+      contactRepository.updateContact(req.params.id, req.body)
         .then(() => {
-          return companyRepository.getCompany(req.params.id)
+          return contactRepository.getContact(req.params.id)
         })
-        .then((company) => {
-          res.status(200).json(company)
+        .then((contact) => {
+          res.status(200).json(contact)
         })
         .catch((error) => {
           winston.error(error)
@@ -79,27 +78,16 @@ function put (req, res, next) {
 }
 
 function remove (req, res, next) {
-  companyRepository.getCompany(req.params.id)
-    .then((company) => {
-      if (company) {
-        companyRepository.deleteCompany(req.params.id)
+  contactRepository.getContact(req.params.id)
+    .then((contact) => {
+      if (contact) {
+        contactRepository.deleteContact(req.params.id)
           .then(() => {
-            return res.status(200).json(company)
+            return res.status(200).json(contact)
           })
       } else {
         res.status(404).send()
       }
-    })
-    .catch((error) => {
-      winston.error(error)
-      next(error)
-    })
-}
-
-function contacts (req, res, next) {
-  contactRepository.getContactsForCompany(req.params.id)
-    .then((contacts) => {
-      res.status(200).json(contacts)
     })
     .catch((error) => {
       winston.error(error)
@@ -112,5 +100,5 @@ router.get('/:id/', get)
 router.post('/', post)
 router.put('/:id/', put)
 router.delete('/:id/', remove)
-router.get('/:id/contacts/', contacts)
+
 module.exports = { router }

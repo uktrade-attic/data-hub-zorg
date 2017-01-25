@@ -3,8 +3,10 @@ const ImportCH = require('../importch')
 const ESIndex = require('../../search/')
 
 function clear (knex) {
-
-  return knex('company').del()
+  return knex('contact').del()
+    .then(() => {
+      return knex('company').del()
+    })
     .then(() => {
       return knex('companieshouse').del()
     })
@@ -30,6 +32,9 @@ function clear (knex) {
       return knex('sector').del()
     })
     .then(() => {
+      return knex('title').del()
+    })
+    .then(() => {
       return ESIndex.deleteIndex()
     })
 }
@@ -41,7 +46,7 @@ function clear (knex) {
 
  */
 
-exports.seed = function (knex, Promise) {
+exports.seed = function (knex) {
   const csvPath = path.join(__dirname, '..', '..', '..', 'data', 'marriot_ch.csv')
   const chrecords = ImportCH.parseFile(csvPath)
 
@@ -83,6 +88,12 @@ exports.seed = function (knex, Promise) {
       })
     })
     .then(() => {
+      return knex('title').insert({
+        id: '35b6db3e-666c-4497-8020-3b1aea0c595b',
+        name: 'Mr'
+      })
+    })
+    .then(() => {
       return knex('country').insert({
         id: '35b6db3e-515c-4497-8020-3b1aea0c595d',
         name: 'United Kingdom'
@@ -105,6 +116,38 @@ exports.seed = function (knex, Promise) {
         sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
         uk_region: '35b6db3e-515c-4497-8020-3b1aea0c5957'
+      })
+    })
+    .then(() => {
+      return knex('company').insert({
+        id: '45b6db3e-515c-4497-8020-3b1aea0c59ff',
+        company_number: '01235583',
+        name: 'MARRIOT HOTELS LIMITED',
+        registered_address_1: '11 OLD JEWRY',
+        registered_address_town: '7TH FLOOR',
+        registered_address_county: 'LONDON',
+        registered_address_postcode: 'EC2R 8DU',
+        registered_address_country: '35b6db3e-515c-4497-8020-3b1aea0c595d',
+        business_type: '35b6db3e-515c-4497-8020-3b1aea0c595b',
+        sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
+        account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
+        uk_region: '35b6db3e-515c-4497-8020-3b1aea0c5957'
+      })
+    })
+    .then(() => {
+      return knex('contact').insert({
+        id: '85b6db3e-515c-4497-8020-3b1aea0c59ff',
+        company: '45b6db3e-515c-4497-8020-3b1aea0c59ff',
+        title: '35b6db3e-666c-4497-8020-3b1aea0c595b',
+        first_name: 'Fred',
+        last_name: 'Bloggs',
+        job_title: 'Director',
+        advisor: '35b6db3e-515c-4497-8020-3b1aea0c5958',
+        primary: false,
+        telephone_number: '7813 321123',
+        email: 'fred@blogg.com',
+        address_same_as_company: true,
+        created_on: new Date()
       })
     })
     .then(() => {
