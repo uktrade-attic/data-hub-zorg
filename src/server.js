@@ -14,8 +14,9 @@ app.use(expressValidator({ customValidators, customSanitizers }))
 
 app.use(locals)
 app.use('/company', require('./controller/companycontroller').router)
-app.use('/companieshousecompany', require('./controller/companieshousecontroller').router)
+app.use('/ch-company', require('./controller/companieshousecontroller').router)
 app.use('/search', require('./controller/searchcontroller'))
+app.get('/metadata/:table/', require('./controller/metadatacontroller'))
 
 app.listen(config.port)
 module.exports = app

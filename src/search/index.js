@@ -78,7 +78,7 @@ function indexAllCompaniesHouse () {
           body.push({ index: {
             _index: INDEX_NAME,
             _id: record.company_number,
-            _type: 'companieshouse_company'
+            _type: 'company_companieshousecompany'
           }})
           body.push(record)
         })
