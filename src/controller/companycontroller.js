@@ -8,17 +8,6 @@ const investmentProjectRepository = require('../db/investmentprojectrepository')
 
 const router = express.Router()
 
-function list (req, res, next) {
-  companyRepository.getCompanies()
-    .then((companies) => {
-      res.status(200).json(companies)
-    })
-    .catch((error) => {
-      winston.error(error)
-      next(error)
-    })
-}
-
 function get (req, res, next) {
   companyRepository.getCompany(req.params.id)
     .then((company) => {
@@ -79,24 +68,6 @@ function put (req, res, next) {
     })
 }
 
-function remove (req, res, next) {
-  companyRepository.getCompany(req.params.id)
-    .then((company) => {
-      if (company) {
-        companyRepository.deleteCompany(req.params.id)
-          .then(() => {
-            return res.status(200).json(company)
-          })
-      } else {
-        res.status(404).send()
-      }
-    })
-    .catch((error) => {
-      winston.error(error)
-      next(error)
-    })
-}
-
 function contacts (req, res, next) {
   contactRepository.getContactsForCompany(req.params.id)
     .then((contacts) => {
@@ -119,11 +90,9 @@ function investmentProjects (req, res, next) {
     })
 }
 
-router.get('/', list)
-router.get('/:id/', get)
 router.post('/', post)
+router.get('/:id/', get)
 router.put('/:id/', put)
-router.delete('/:id/', remove)
 router.get('/:id/contacts/', contacts)
 router.get('/:id/investmentprojects/', investmentProjects)
 

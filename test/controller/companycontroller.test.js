@@ -22,20 +22,6 @@ describe('Company API Routes', () => {
       })
   })
 
-  describe('Get all companies', () => {
-    it('should return all companies', (done) => {
-      chai.request(server)
-        .get('/company/')
-        .end((err, res) => {
-          console.log(err)
-          expect(res).to.have.status(200)
-          expect(res).to.be.json
-          expect(res.body).to.be.a('array')
-          expect(res.body.length).to.eq(2)
-          done()
-        })
-    })
-  })
   describe('Get single company', () => {
     it('should return a single row', (done) => {
       chai.request(server)
@@ -178,29 +164,6 @@ describe('Company API Routes', () => {
           expect(res.body).to.have.property('name')
           expect(res.body.name).to.have.property('msg')
           expect(res.body.name.msg).to.equal('You must provide a name')
-          done()
-        })
-    })
-  })
-  describe('Remove a company', () => {
-    it('Should remove a company from the database', (done) => {
-      chai.request(server)
-        .delete('/company/35b6db3e-515c-4497-8020-3b1aea0c59ff/')
-        .end((err, res) => {
-          expect(res).to.have.status(200)
-          chai.request(server)
-            .get('/company/35b6db3e-515c-4497-8020-3b1aea0c5957/')
-            .end((err, res) => {
-              expect(res).to.have.status(404)
-              done()
-            })
-        })
-    })
-    it('Should return 404 when the id to delete doesnt exist', (done) => {
-      chai.request(server)
-        .delete('/company/45b6db3e-515c-4497-8020-3b1aea0c5957/')
-        .end((err, res) => {
-          expect(res).to.have.status(404)
           done()
         })
     })

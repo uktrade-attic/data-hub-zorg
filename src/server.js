@@ -19,6 +19,7 @@ app.use('/contact', require('./controller/contactcontroller').router)
 app.use('/search', require('./controller/searchcontroller'))
 app.get('/metadata/:table/', require('./controller/metadatacontroller').list)
 app.get('/metadata/:table/:id/', require('./controller/metadatacontroller').value)
+app.use(express.static(`${__dirname}/../src/public`))
 
 app.listen(config.port)
 module.exports = app
