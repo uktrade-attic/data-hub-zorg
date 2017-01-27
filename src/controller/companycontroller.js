@@ -113,6 +113,6 @@ router.get('/:id/', get)
 router.put('/:id/', put)
 router.get('/:id/contacts/', contacts)
 router.get('/:id/investmentprojects/', investmentProjects)
-router.get('/:id/related', related)
+router.get('/:id/related/', related)
 
 module.exports = { router }
