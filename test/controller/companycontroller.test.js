@@ -168,4 +168,19 @@ describe('Company API Routes', () => {
         })
     })
   })
+  describe('related companies', () => {
+    it('should return a list of related companies', () => {
+      chai.request(server)
+        .get('/company/35b6db3e-515c-4497-8020-3b1aea0c69ff/related/')
+        .end((err, res) => {
+          if (err) console.log(err)
+          expect(res).to.be.json
+          expect(res.body).to.be.a('object')
+          expect(res.body).to.deep.equal({
+            parents: ['35b6db3e-515c-4497-8020-3b1aea0c59ff'],
+            children: ['55b6db3e-515c-4497-8020-3b1aea0c69ff']
+          })
+        })
+    })
+  })
 })

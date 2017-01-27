@@ -3,7 +3,10 @@ const ImportCH = require('../importch')
 const ESIndex = require('../../search/')
 
 function clear (knex) {
-  return knex('investmentproject').del()
+  return knex('companyfamily').del()
+    .then(() => {
+      return knex('investmentproject').del()
+    })
     .then(() => {
       return knex('contact').del()
     })
@@ -67,6 +70,12 @@ exports.seed = function (knex) {
       })
     })
     .then(() => {
+      return knex('region').insert({
+        id: '35b6db3e-515c-4497-1111-3b1aea0c5957',
+        name: 'Scotland'
+      })
+    })
+    .then(() => {
       return knex('advisor').insert({
         id: '35b6db3e-515c-4497-8020-3b1aea0c5958',
         name: 'Fred Brown'
@@ -88,6 +97,12 @@ exports.seed = function (knex) {
       return knex('businesstype').insert({
         id: '35b6db3e-515c-4497-8020-3b1aea0c595b',
         name: 'Private Limited Company'
+      })
+    })
+    .then(() => {
+      return knex('businesstype').insert({
+        id: '35b6db3e-515c-4497-8888-3b1aea0c595b',
+        name: 'Child of a UK private or public limited company'
       })
     })
     .then(() => {
@@ -231,6 +246,34 @@ exports.seed = function (knex) {
         state_date: new Date(2013, 4, 7),
         open: false,
         created_on: new Date()
+      })
+    })
+    .then(() => {   // CDMS Only company with no CH data
+      return knex('company').insert({
+        id: '99b6db3e-515c-4497-9999-3b1aea0c70ff',
+        name: 'Marriott International Aberdeen',
+        registered_address_1: 'Aberdeen Marriott Hotel',
+        registered_address_2: 'Overton Circle',
+        registered_address_town: 'Dyce',
+        registered_address_county: 'Aberdeen',
+        registered_address_postcode: 'AB12 7AZ',
+        registered_address_country: '35b6db3e-515c-4497-8020-3b1aea0c595d',
+        business_type: '35b6db3e-515c-4497-8888-3b1aea0c595b',
+        sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
+        account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
+        uk_region: '35b6db3e-515c-4497-1111-3b1aea0c5957'
+      })
+    })
+    .then(() => {
+      return knex('companyfamily').insert({
+        company_parent: '99b6db3e-515c-4497-8020-3b1aea0c70ff', // Marriott Brown
+        company_child: '45b6db3e-515c-4497-8020-3b1aea0c59ff'   // Marriot Hotels
+      })
+    })
+    .then(() => {
+      return knex('companyfamily').insert({
+        company_parent: '45b6db3e-515c-4497-8020-3b1aea0c59ff', // Marriott Hotels
+        company_child: '35b6db3e-515c-4497-8020-3b1aea0c59ff'   // Marriott Cleaning
       })
     })
     .then(() => {

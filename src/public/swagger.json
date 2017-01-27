@@ -173,6 +173,35 @@
         }
       }
     },
+    "/company/{id}/related/": {
+      "get": {
+        "summary": "Get a list of parent and children companies",
+        "operationId": "relatedcompanies",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The unique UUID for the company",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Relationships",
+            "schema":{
+              "type":"object",
+              "items":{
+                "$ref":"#/definitions/RelatedCompanies"
+              }
+            }
+          }
+        }
+      }
+    },
     "/ch-company/{company_number}/":{
       "get":{
         "summary":"Retrieve companies house data",
@@ -831,6 +860,23 @@
         "incorporation_date":{
           "type":"string",
           "format":"date"
+        }
+      }
+    },
+    "RelatedCompanies": {
+      "type": "object",
+      "properties": {
+        "parents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }
