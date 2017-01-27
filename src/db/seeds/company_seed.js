@@ -84,7 +84,7 @@ exports.seed = function (knex) {
     .then(() => {
       return knex('turnoverrange').insert({
         id: '35bbdb3e-515c-4497-8020-3b1aea0c595b',
-        name: '£20-£100000'
+        name: '£6.7M-£33.5M'
       })
     })
     .then(() => {
@@ -106,6 +106,12 @@ exports.seed = function (knex) {
       })
     })
     .then(() => {
+      return knex('businesstype').insert({
+        id: '35b6db45-515c-4497-8888-3b1aea0c595b',
+        name: 'Foreign company'
+      })
+    })
+    .then(() => {
       return knex('title').insert({
         id: '35b6db3e-666c-4497-8020-3b1aea0c595b',
         name: 'Mr'
@@ -115,6 +121,12 @@ exports.seed = function (knex) {
       return knex('country').insert({
         id: '35b6db3e-515c-4497-8020-3b1aea0c595d',
         name: 'United Kingdom'
+      })
+    })
+    .then(() => {
+      return knex('country').insert({
+        id: '35b6db3a-515c-4497-8020-3b1aea0c595d',
+        name: 'Russia'
       })
     })
     .then(() => {
@@ -149,7 +161,11 @@ exports.seed = function (knex) {
         business_type: '35b6db3e-515c-4497-8020-3b1aea0c595b',
         sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
-        uk_region: '35b6db3e-515c-4497-8020-3b1aea0c5957'
+        uk_region: '35b6db3e-515c-4497-8020-3b1aea0c5957',
+        website: 'http://www.marriott.co.uk/',
+        turnover_range: '35bbdb3e-515c-4497-8020-3b1aea0c595b',
+        employee_range: '35b6db3e-515c-4497-8020-3b1aea0c595a',
+        headquarters: 'UK Headquarters'
       })
     })
     .then(() => {
@@ -274,6 +290,26 @@ exports.seed = function (knex) {
       return knex('companyfamily').insert({
         company_parent: '45b6db3e-515c-4497-8020-3b1aea0c59ff', // Marriott Hotels
         company_child: '35b6db3e-515c-4497-8020-3b1aea0c59ff'   // Marriott Cleaning
+      })
+    })
+    .then(() => {
+      return knex('companyfamily').insert({
+        company_parent: '45b6db3e-515c-4497-8020-3b1aea0c59ff', // Marriott Hotels
+        company_child: '99b6db3e-515c-4497-9999-3b1aea0c70ff'   // Marriott Aberdeen
+      })
+    })
+    .then(() => {   // CDMS Only company with no CH data
+      return knex('company').insert({
+        id: '99b6dd3e-515c-4497-9999-3b1aea0c70ff',
+        name: 'Marriott Hotels & Resorts - EHQ',
+        registered_address_1: '23/1 1st Tverskaya-yamskaya str.',
+        registered_address_county: 'Moscow',
+        registered_address_postcode: '125047',
+        registered_address_country: '35b6db3a-515c-4497-8020-3b1aea0c595d',
+        business_type: '35b6db45-515c-4497-8888-3b1aea0c595b',
+        sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
+        account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
+        headquarters: 'European headquarters'
       })
     })
     .then(() => {
