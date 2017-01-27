@@ -4,6 +4,10 @@ function Companies () {
   return knex('company')
 }
 
+function CompanyFamily () {
+  return knex('companyfamily')
+}
+
 function getCompany (companyId) {
   return Companies().where('id', companyId).first()
 }
@@ -28,4 +32,20 @@ function deleteCompany (id) {
   return Companies().where('id', id).del()
 }
 
-module.exports = { getCompany, getCompanies, addCompany, deleteCompany, updateCompany }
+function getParentCompanies (id) {
+  return CompanyFamily().where('company_child', id).map(record => record['company_parent'])
+}
+
+function getChildCompanies (id) {
+  return CompanyFamily().where('company_parent', id).map(record => record['company_child'])
+}
+
+module.exports = {
+  getCompany,
+  getCompanies,
+  addCompany,
+  deleteCompany,
+  updateCompany,
+  getParentCompanies,
+  getChildCompanies
+}

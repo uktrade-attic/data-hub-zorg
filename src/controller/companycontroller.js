@@ -90,10 +90,29 @@ function investmentProjects (req, res, next) {
     })
 }
 
+function related (req, res, next) {
+  const id = req.params.id
+  const result = {}
+  companyRepository.getParentCompanies(id)
+    .then((parents) => {
+      result.parents = parents
+      return companyRepository.getChildCompanies(id)
+    })
+    .then((children) => {
+      result.children = children
+      res.json(result)
+    })
+    .catch((error) => {
+      winston.error(error)
+      next(error)
+    })
+}
+
 router.post('/', post)
 router.get('/:id/', get)
 router.put('/:id/', put)
 router.get('/:id/contacts/', contacts)
 router.get('/:id/investmentprojects/', investmentProjects)
+router.get('/:id/related', related)
 
 module.exports = { router }
