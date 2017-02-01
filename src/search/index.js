@@ -101,7 +101,7 @@ function search (term) {
   }
 
   return client
-    .search({INDEX_NAME, body})
+    .search({index: INDEX_NAME, body: body})
     .then((results) => {
       return results.hits
     })
