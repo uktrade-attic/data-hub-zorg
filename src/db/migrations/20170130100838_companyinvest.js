@@ -1,6 +1,7 @@
 exports.up = function (knex, Promise) {
   return Promise.all([
-    knex.schema.table('company', function (table) {
+    knex.schema.createTable('companyinvestmentsummary', (table) => {
+      table.uuid('id').notNullable().primary()
       table.string('investment_tier')
       table.uuid('investment_account_manager').references('advisor.id')
       table.uuid('client_relationship_manager').references('advisor.id')
@@ -12,12 +13,6 @@ exports.up = function (knex, Promise) {
 
 exports.down = function (knex, Promise) {
   return Promise.all([
-    knex.schema.table('company', function (table) {
-      table.dropColumn('investment_tier')
-      table.dropColumn('investment_account_manager')
-      table.dropColumn('client_relationship_manager')
-      table.dropColumn('ownership')
-      table.dropColumn('ownership_country')
-    })
+    knex.schema.dropTable('companyinvestmentsummary')
   ])
 }
