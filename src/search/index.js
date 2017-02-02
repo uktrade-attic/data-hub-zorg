@@ -4,6 +4,9 @@ const config = require('../../config')
 const companiesHouseRepository = require('../db/companieshouserepository')
 const companyRepository = require('../db/companyrepository')
 
+const countryIds = require('../db/countryids').ids
+
+
 const INDEX_NAME = config.search.index
 const client = new elasticsearch.Client({
   hosts: config.search.hosts
@@ -110,7 +113,7 @@ function search (term) {
 function nonUkSearch (term) {
   let body = {
     query: {
-      query_string: { query: `${term}* NOT 4ed85f99-7e27-4041-ae7f-0440d2b36958` }
+      query_string: { query: `${term}* NOT ` +  countryIds["united kingdom"]}
     }
   }
 
