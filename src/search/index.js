@@ -4,6 +4,9 @@ const config = require('../../config')
 const companiesHouseRepository = require('../db/companieshouserepository')
 const companyRepository = require('../db/companyrepository')
 
+const countryIds = require('../db/countryids').ids
+
+
 const INDEX_NAME = config.search.index
 const client = new elasticsearch.Client({
   hosts: config.search.hosts
@@ -107,6 +110,20 @@ function search (term) {
     })
 }
 
+function nonUkSearch (term) {
+  let body = {
+    query: {
+      query_string: { query: `${term}* NOT ` +  countryIds["united kingdom"]}
+    }
+  }
+
+  return client
+    .search({index: INDEX_NAME, body: body})
+    .then((results) => {
+      return results.hits
+    })
+}
+
 function deleteIndex () {
   return new Promise((resolve) => {
     client.indices.get({index: '_all'}, (err, resp) => {
@@ -167,5 +184,6 @@ module.exports = {
   indexAllCompaniesHouse,
   search,
   deleteIndex,
-  createIndex
+  createIndex,
+  nonUkSearch
 }

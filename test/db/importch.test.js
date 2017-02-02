@@ -46,7 +46,7 @@ describe('Import Companies House Data', () => {
         registered_address_2: 'FULHAM',
         registered_address_3: '',
         registered_address_4: '',
-        registered_address_country: null,
+        registered_address_country: '4ed85f99-7e27-4041-ae7f-0440d2b36958',
         registered_address_county: '',
         registered_address_postcode: 'SW6 3ER',
         registered_address_town: 'LONDON',

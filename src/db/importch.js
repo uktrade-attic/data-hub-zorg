@@ -1,4 +1,5 @@
 const Baby = require('babyparse')
+const countryIds = require('./countryids').ids
 
 function parseFile (filePath) {
   const csv = Baby.parseFiles(filePath, { header: true })
@@ -18,7 +19,7 @@ function convertCsvToObj (object) {
     registered_address_2: object['RegAddress.AddressLine2'],
     registered_address_3: '',
     registered_address_4: '',
-    registered_address_country: null,
+    registered_address_country: countryIds[object.CountryOfOrigin.toLowerCase()],
     registered_address_county: object['RegAddress.County'],
     registered_address_postcode: object['RegAddress.PostCode'],
     registered_address_town: object['RegAddress.PostTown'],

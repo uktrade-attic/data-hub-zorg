@@ -125,14 +125,20 @@ exports.seed = function (knex) {
     })
     .then(() => {
       return knex('country').insert({
-        id: '35b6db3e-515c-4497-8020-3b1aea0c595d',
+        id: '4ed85f99-7e27-4041-ae7f-0440d2b36958',
         name: 'United Kingdom'
       })
     })
     .then(() => {
       return knex('country').insert({
-        id: '35b6db3a-515c-4497-8020-3b1aea0c595d',
+        id: '6abbee91-7b85-49b8-a133-d59455dc2aad',
         name: 'Russia'
+      })
+    })
+    .then(() => {
+      return knex('country').insert({
+        id: '1cb43855-31f9-4cc6-a9a7-893ba5fb0328',
+        name: 'United States of America'
       })
     })
     .then(() => {
@@ -147,7 +153,7 @@ exports.seed = function (knex) {
         registered_address_town: 'FULHAM',
         registered_address_county: 'LONDON',
         registered_address_postcode: 'SW6 3ER',
-        registered_address_country: '35b6db3e-515c-4497-8020-3b1aea0c595d',
+        registered_address_country: '4ed85f99-7e27-4041-ae7f-0440d2b36958',
         business_type: '35b6db3e-515c-4497-8020-3b1aea0c595b',
         sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
@@ -163,7 +169,7 @@ exports.seed = function (knex) {
         registered_address_2: '7TH FLOOR',
         registered_address_county: 'LONDON',
         registered_address_postcode: 'EC2R 8DU',
-        registered_address_country: '35b6db3e-515c-4497-8020-3b1aea0c595d',
+        registered_address_country: '4ed85f99-7e27-4041-ae7f-0440d2b36958',
         business_type: '35b6db3e-515c-4497-8020-3b1aea0c595b',
         sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
@@ -199,7 +205,7 @@ exports.seed = function (knex) {
         registered_address_town: 'Farringdon',
         registered_address_county: 'Oxfordshire',
         registered_address_postcode: 'SN7 7HL',
-        registered_address_country: '35b6db3e-515c-4497-8020-3b1aea0c595d',
+        registered_address_country: '4ed85f99-7e27-4041-ae7f-0440d2b36958',
         business_type: '35b6db3e-515c-4497-8020-3b1aea0c595b',
         sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
@@ -279,7 +285,7 @@ exports.seed = function (knex) {
         registered_address_town: 'Dyce',
         registered_address_county: 'Aberdeen',
         registered_address_postcode: 'AB12 7AZ',
-        registered_address_country: '35b6db3e-515c-4497-8020-3b1aea0c595d',
+        registered_address_country: '4ed85f99-7e27-4041-ae7f-0440d2b36958',
         business_type: '35b6db3e-515c-4497-8888-3b1aea0c595b',
         sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
@@ -311,7 +317,7 @@ exports.seed = function (knex) {
         registered_address_1: '23/1 1st Tverskaya-yamskaya str.',
         registered_address_county: 'Moscow',
         registered_address_postcode: '125047',
-        registered_address_country: '35b6db3a-515c-4497-8020-3b1aea0c595d',
+        registered_address_country: '6abbee91-7b85-49b8-a133-d59455dc2aad',
         business_type: '35b6db45-515c-4497-8888-3b1aea0c595b',
         sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
