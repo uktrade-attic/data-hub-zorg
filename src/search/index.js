@@ -107,6 +107,20 @@ function search (term) {
     })
 }
 
+function nonUkSearch (term) {
+  let body = {
+    query: {
+      query_string: { query: `${term}* NOT 4ed85f99-7e27-4041-ae7f-0440d2b36958` }
+    }
+  }
+
+  return client
+    .search({index: INDEX_NAME, body: body})
+    .then((results) => {
+      return results.hits
+    })
+}
+
 function deleteIndex () {
   return new Promise((resolve) => {
     client.indices.get({index: '_all'}, (err, resp) => {
@@ -167,5 +181,6 @@ module.exports = {
   indexAllCompaniesHouse,
   search,
   deleteIndex,
-  createIndex
+  createIndex,
+  nonUkSearch
 }
