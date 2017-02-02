@@ -82,6 +82,12 @@ exports.seed = function (knex) {
       })
     })
     .then(() => {
+      return knex('advisor').insert({
+        id: '35b6ff3e-515c-4497-8020-3b1aea0c5958',
+        name: 'Fred Green'
+      })
+    })
+    .then(() => {
       return knex('turnoverrange').insert({
         id: '35bbdb3e-515c-4497-8020-3b1aea0c595b',
         name: '£6.7M-£33.5M'

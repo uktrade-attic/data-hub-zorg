@@ -90,6 +90,28 @@ function investmentProjects (req, res, next) {
     })
 }
 
+function getCompanyInvestmentSummary (req, res, next) {
+  companyRepository.getCompanyInvestmentSummary(req.params.id)
+    .then((investmentSummary) => {
+      res.status(200).json(investmentSummary)
+    })
+    .catch((error) => {
+      winston.error(error)
+      next(error)
+    })
+}
+
+function updateCompanyInvestmentSummary (req, res, next) {
+  companyRepository.updateCompanyInvestmentSummary(req.body)
+  .then((summary) => {
+    res.status(200).json(summary)
+  })
+  .catch((error) => {
+    winston.error(error)
+    next(error)
+  })
+}
+
 function related (req, res, next) {
   const id = req.params.id
   const result = {}
@@ -113,6 +135,8 @@ router.get('/:id/', get)
 router.put('/:id/', put)
 router.get('/:id/contacts/', contacts)
 router.get('/:id/investmentprojects/', investmentProjects)
+router.get('/:id/investmentsummary/', getCompanyInvestmentSummary)
+router.post('/:id/investmentsummary/', updateCompanyInvestmentSummary)
 router.get('/:id/related/', related)
 
 module.exports = { router }
