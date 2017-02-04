@@ -107,6 +107,12 @@ exports.seed = function (knex) {
     })
     .then(() => {
       return knex('businesstype').insert({
+        id: '98d14e94-5d95-e211-a939-e4115bead28a',
+        name: 'Company'
+      })
+    })
+    .then(() => {
+      return knex('businesstype').insert({
         id: '35b6db3e-515c-4497-8888-3b1aea0c595b',
         name: 'Child of a UK private or public limited company'
       })
@@ -286,7 +292,7 @@ exports.seed = function (knex) {
         registered_address_county: 'Aberdeen',
         registered_address_postcode: 'AB12 7AZ',
         registered_address_country: '4ed85f99-7e27-4041-ae7f-0440d2b36958',
-        business_type: '35b6db3e-515c-4497-8888-3b1aea0c595b',
+        business_type: '98d14e94-5d95-e211-a939-e4115bead28a',
         sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
         uk_region: '35b6db3e-515c-4497-1111-3b1aea0c5957'
@@ -318,7 +324,7 @@ exports.seed = function (knex) {
         registered_address_county: 'Moscow',
         registered_address_postcode: '125047',
         registered_address_country: '6abbee91-7b85-49b8-a133-d59455dc2aad',
-        business_type: '35b6db45-515c-4497-8888-3b1aea0c595b',
+        business_type: '98d14e94-5d95-e211-a939-e4115bead28a',
         sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
         headquarters: 'European headquarters'
