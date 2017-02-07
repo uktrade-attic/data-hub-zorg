@@ -318,7 +318,7 @@ exports.seed = function (knex) {
     })
     .then(() => {   // CDMS Only company with no CH data
       return knex('company').insert({
-        id: '99b6dd3e-515c-4497-9999-3b1aea0c70ff',
+        id: 'bddc1331-fe3d-44d6-aecf-471c49f9a0c0',
         name: 'Marriott Hotels & Resorts - EHQ',
         registered_address_1: '23/1 1st Tverskaya-yamskaya str.',
         registered_address_county: 'Moscow',
@@ -328,6 +328,30 @@ exports.seed = function (knex) {
         sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
         headquarters: 'European headquarters'
+      })
+    })
+    .then(() => {
+      return knex('investmentproject').insert({
+        id: '0e017c74-7d7e-4577-b978-1e80e353965b',
+        company: 'bddc1331-fe3d-44d6-aecf-471c49f9a0c0',
+        name: 'New investment in UK or elsewhere',
+        value: 'Good',
+        state: 'Active',
+        land_date: new Date(2017, 5, 30),
+        open: true,
+        created_on: new Date()
+      })
+    })
+    .then(() => {
+      return knex('investmentproject').insert({
+        id: '46b56fa8-7cd7-45a3-9d21-4115254c13e8',
+        company: 'bddc1331-fe3d-44d6-aecf-471c49f9a0c0',
+        name: 'Expansion in Liverpool',
+        value: 'Standard',
+        state: 'Prospect',
+        land_date: new Date(2017, 12, 1),
+        open: true,
+        created_on: new Date()
       })
     })
     .then(() => {
