@@ -88,6 +88,12 @@ exports.seed = function (knex) {
       })
     })
     .then(() => {
+      return knex('advisor').insert({
+        id: '360c19ee-dc20-4f72-bac8-e4054eef50b5',
+        name: 'Andrei Nikolayevich Tupolev'
+      })
+    })
+    .then(() => {
       return knex('turnoverrange').insert({
         id: '35bbdb3e-515c-4497-8020-3b1aea0c595b',
         name: '£6.7M-£33.5M'
@@ -352,6 +358,16 @@ exports.seed = function (knex) {
         land_date: new Date(2017, 12, 1),
         open: true,
         created_on: new Date()
+      })
+    })
+    .then(() => {
+      return knex('companyinvestmentsummary').insert({
+        id: 'bddc1331-fe3d-44d6-aecf-471c49f9a0c0',
+          investment_tier: "B - Top 300",
+          investment_account_manager: "35b6ff3e-515c-4497-8020-3b1aea0c5958",
+          client_relationship_manager: "360c19ee-dc20-4f72-bac8-e4054eef50b5",
+          ownership: "",
+          ownership_country: "Russia"
       })
     })
     .then(() => {
