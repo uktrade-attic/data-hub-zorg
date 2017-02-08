@@ -149,6 +149,12 @@ exports.seed = function (knex) {
     })
     .then(() => {
       return knex('country').insert({
+        id: '2cdcb25b-6fe3-4ada-b1be-81222e927cee',
+        name: 'Hong Kong'
+      })
+    })
+    .then(() => {
+      return knex('country').insert({
         id: '1cb43855-31f9-4cc6-a9a7-893ba5fb0328',
         name: 'United States of America'
       })
@@ -363,11 +369,59 @@ exports.seed = function (knex) {
     .then(() => {
       return knex('companyinvestmentsummary').insert({
         id: 'bddc1331-fe3d-44d6-aecf-471c49f9a0c0',
+        investment_tier: "B - Top 300",
+        investment_account_manager: "35b6ff3e-515c-4497-8020-3b1aea0c5958",
+        client_relationship_manager: "360c19ee-dc20-4f72-bac8-e4054eef50b5",
+        ownership: "",
+        ownership_country: "Russia"
+      })
+    })
+    .then(() => {   // CDMS Only company with no CH data
+      return knex('company').insert({
+        id: '6018122e-eb53-4dc7-a87a-52d4cb43a656',
+        name: 'Marriott International, Inc.',
+        registered_address_1: 'Suite 1108, 11/F Cityplaza One',
+        registered_address_county: 'Hong Kong',
+        registered_address_postcode: '1111',
+        registered_address_country: '2cdcb25b-6fe3-4ada-b1be-81222e927cee',
+        business_type: '98d14e94-5d95-e211-a939-e4115bead28a',
+        sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
+        account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
+        headquarters: 'Asian headquarters'
+      })
+    })
+    .then(() => {
+      return knex('investmentproject').insert({
+        id: '4b286f4c-f9a0-4fe6-bfbc-abd19c28ea17',
+        company: '6018122e-eb53-4dc7-a87a-52d4cb43a656',
+        name: 'New investment in UK or elsewhere',
+        value: 'Good',
+        state: 'Active',
+        land_date: new Date(2017, 5, 30),
+        open: true,
+        created_on: new Date()
+      })
+    })
+    .then(() => {
+      return knex('investmentproject').insert({
+        id: '9654f195-74c8-4525-bf7a-c4e57ed90e7b',
+        company: '6018122e-eb53-4dc7-a87a-52d4cb43a656',
+        name: 'Expansion in Manchester',
+        value: 'Standard',
+        state: 'Prospect',
+        land_date: new Date(2017, 12, 1),
+        open: true,
+        created_on: new Date()
+      })
+    })
+    .then(() => {
+      return knex('companyinvestmentsummary').insert({
+        id: '6018122e-eb53-4dc7-a87a-52d4cb43a656',
           investment_tier: "B - Top 300",
           investment_account_manager: "35b6ff3e-515c-4497-8020-3b1aea0c5958",
           client_relationship_manager: "360c19ee-dc20-4f72-bac8-e4054eef50b5",
           ownership: "",
-          ownership_country: "Russia"
+          ownership_country: "Hong Kong"
       })
     })
     .then(() => {
@@ -383,3 +437,4 @@ exports.seed = function (knex) {
       return ESIndex.indexAllCompanies()
     })
 }
+
