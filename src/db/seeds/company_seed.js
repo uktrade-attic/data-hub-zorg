@@ -106,6 +106,12 @@ exports.seed = function (knex) {
       })
     })
     .then(() => {
+      return knex('advisor').insert({
+        id: '360c19ee-dc20-4f72-bac8-e4054eef50b5',
+        name: 'Andrei Nikolayevich Tupolev'
+      })
+    })
+    .then(() => {
       return knex('turnoverrange').insert({
         id: '35bbdb3e-515c-4497-8020-3b1aea0c595b',
         name: '£6.7M-£33.5M'
@@ -157,6 +163,12 @@ exports.seed = function (knex) {
       return knex('country').insert({
         id: '6abbee91-7b85-49b8-a133-d59455dc2aad',
         name: 'Russia'
+      })
+    })
+    .then(() => {
+      return knex('country').insert({
+        id: '2cdcb25b-6fe3-4ada-b1be-81222e927cee',
+        name: 'Hong Kong'
       })
     })
     .then(() => {
@@ -336,7 +348,7 @@ exports.seed = function (knex) {
     })
     .then(() => {   // CDMS Only company with no CH data
       return knex('company').insert({
-        id: '99b6dd3e-515c-4497-9999-3b1aea0c70ff',
+        id: 'bddc1331-fe3d-44d6-aecf-471c49f9a0c0',
         name: 'Marriott Hotels & Resorts - EHQ',
         registered_address_1: '23/1 1st Tverskaya-yamskaya str.',
         registered_address_county: 'Moscow',
@@ -346,6 +358,88 @@ exports.seed = function (knex) {
         sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
         headquarters: 'European headquarters'
+      })
+    })
+    .then(() => {
+      return knex('investmentproject').insert({
+        id: '0e017c74-7d7e-4577-b978-1e80e353965b',
+        company: 'bddc1331-fe3d-44d6-aecf-471c49f9a0c0',
+        name: 'New investment in UK or elsewhere',
+        value: 'Good',
+        state: 'Active',
+        land_date: new Date(2017, 5, 30),
+        open: true,
+        created_on: new Date()
+      })
+    })
+    .then(() => {
+      return knex('investmentproject').insert({
+        id: '46b56fa8-7cd7-45a3-9d21-4115254c13e8',
+        company: 'bddc1331-fe3d-44d6-aecf-471c49f9a0c0',
+        name: 'Expansion in Liverpool',
+        value: 'Standard',
+        state: 'Prospect',
+        land_date: new Date(2017, 12, 1),
+        open: true,
+        created_on: new Date()
+      })
+    })
+    .then(() => {
+      return knex('companyinvestmentsummary').insert({
+        id: 'bddc1331-fe3d-44d6-aecf-471c49f9a0c0',
+        investment_tier: "B - Top 300",
+        investment_account_manager: "35b6ff3e-515c-4497-8020-3b1aea0c5958",
+        client_relationship_manager: "360c19ee-dc20-4f72-bac8-e4054eef50b5",
+        ownership: "",
+        ownership_country: "Russia"
+      })
+    })
+    .then(() => {   // CDMS Only company with no CH data
+      return knex('company').insert({
+        id: '6018122e-eb53-4dc7-a87a-52d4cb43a656',
+        name: 'Marriott International, Inc.',
+        registered_address_1: 'Suite 1108, 11/F Cityplaza One',
+        registered_address_county: 'Hong Kong',
+        registered_address_postcode: '1111',
+        registered_address_country: '2cdcb25b-6fe3-4ada-b1be-81222e927cee',
+        business_type: '98d14e94-5d95-e211-a939-e4115bead28a',
+        sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
+        account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
+        headquarters: 'Asian headquarters'
+      })
+    })
+    .then(() => {
+      return knex('investmentproject').insert({
+        id: '4b286f4c-f9a0-4fe6-bfbc-abd19c28ea17',
+        company: '6018122e-eb53-4dc7-a87a-52d4cb43a656',
+        name: 'New investment in UK or elsewhere',
+        value: 'Good',
+        state: 'Active',
+        land_date: new Date(2017, 5, 30),
+        open: true,
+        created_on: new Date()
+      })
+    })
+    .then(() => {
+      return knex('investmentproject').insert({
+        id: '9654f195-74c8-4525-bf7a-c4e57ed90e7b',
+        company: '6018122e-eb53-4dc7-a87a-52d4cb43a656',
+        name: 'Expansion in Manchester',
+        value: 'Standard',
+        state: 'Prospect',
+        land_date: new Date(2017, 12, 1),
+        open: true,
+        created_on: new Date()
+      })
+    })
+    .then(() => {
+      return knex('companyinvestmentsummary').insert({
+        id: '6018122e-eb53-4dc7-a87a-52d4cb43a656',
+          investment_tier: "B - Top 300",
+          investment_account_manager: "35b6ff3e-515c-4497-8020-3b1aea0c5958",
+          client_relationship_manager: "360c19ee-dc20-4f72-bac8-e4054eef50b5",
+          ownership: "",
+          ownership_country: "Hong Kong"
       })
     })
     .then(() => {
@@ -361,3 +455,4 @@ exports.seed = function (knex) {
       return ESIndex.indexAllCompanies()
     })
 }
+
