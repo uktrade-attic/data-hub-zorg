@@ -11,6 +11,9 @@ function clear (knex) {
       return knex('contact').del()
     })
     .then(() => {
+      return knex('companyinvestmentsummary').del()
+    })
+    .then(() => {
       return knex('company').del()
     })
     .then(() => {
