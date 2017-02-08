@@ -144,7 +144,6 @@ function limitedSearch (term) {
     })
 }
 
-
 function chSearch (term) {
   return client
     .search(INDEX_NAME, COMPANIES_HOUSE, {

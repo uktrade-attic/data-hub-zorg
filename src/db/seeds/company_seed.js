@@ -60,7 +60,25 @@ exports.seed = function (knex) {
     .then(() => {
       return knex('sector').insert({
         id: '35b6db3e-515c-4497-8020-3b1aea0c5956',
-        name: 'Cleaning Services'
+        name: 'Office : Cleaning Services'
+      })
+    })
+    .then(() => {
+      return knex('sector').insert({
+        id: '35b6db3e-515b-4497-8020-3b1aea0c5956',
+        name: 'Office : Rental'
+      })
+    })
+    .then(() => {
+      return knex('sector').insert({
+        id: 'e9e181d2-f6a0-e211-b972-e4115bead28a',
+        name: 'Aerospace : Component Manufacturing'
+      })
+    })
+    .then(() => {
+      return knex('sector').insert({
+        id: 'b122c9d2-5f95-e211-a939-e4115bead28a',
+        name: 'Aerospace : Maintenance'
       })
     })
     .then(() => {

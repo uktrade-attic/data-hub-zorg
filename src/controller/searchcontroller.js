@@ -1,10 +1,7 @@
 const search = require('../search')
-
 const express = require('express')
 
-
 const router = express.Router()
-
 
 function fullsearch (req, res) {
   if (!req.query.term || req.query.term.length === 0) {

@@ -1,4 +1,5 @@
 const knex = require('../db/knex')
+const generateUUID = require('../lib/uuid').generateUUID
 
 function Companies () {
   return knex('company')
@@ -21,6 +22,7 @@ function getCompanies () {
 }
 
 function addCompany (company) {
+  company.id = generateUUID()
   return Companies()
     .insert(company, 'id')
     .then((result) => {

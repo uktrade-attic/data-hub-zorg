@@ -1,6 +1,5 @@
 const express = require('express')
 const winston = require('winston')
-const generateUUID = require('../lib/uuid').generateUUID
 const companyRepository = require('../db/companyrepository')
 const companyValidationSchema = require('../validation/companyscheme')
 const contactRepository = require('../db/contactrepository')
@@ -30,15 +29,17 @@ function post (req, res, next) {
       if (!result.isEmpty()) {
         return res.status(400).json(result.mapped())
       }
-
       const companyToAdd = Object.assign({}, req.body)
-      companyToAdd.id = generateUUID()
       companyRepository.addCompany(companyToAdd)
         .then((id) => {
           return companyRepository.getCompany(id)
         })
         .then((company) => {
           res.status(200).json(company)
+        })
+        .catch((error) => {
+          winston.error(error)
+          next(error)
         })
     })
     .catch((error) => {
