@@ -1,4 +1,4 @@
-/* global describe: true, beforeEach: true, afterEach: true, it:true */
+/* global describe: true, beforeEach: true, afterEach: true, it:true, expect: true */
 const search = require('../../src/search')
 
 describe('Search Index', () => {
