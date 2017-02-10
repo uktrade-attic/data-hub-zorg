@@ -23,9 +23,6 @@ function clear (knex) {
       return knex('country').del()
     })
     .then(() => {
-      return knex('businesstype').del()
-    })
-    .then(() => {
       return knex('employeerange').del()
     })
     .then(() => {
@@ -127,30 +124,6 @@ exports.seed = function (knex) {
       })
     })
     .then(() => {
-      return knex('businesstype').insert({
-        id: '35b6db3e-515c-4497-8020-3b1aea0c595b',
-        name: 'Private Limited Company'
-      })
-    })
-    .then(() => {
-      return knex('businesstype').insert({
-        id: '98d14e94-5d95-e211-a939-e4115bead28a',
-        name: 'Company'
-      })
-    })
-    .then(() => {
-      return knex('businesstype').insert({
-        id: '35b6db3e-515c-4497-8888-3b1aea0c595b',
-        name: 'Child of a UK private or public limited company'
-      })
-    })
-    .then(() => {
-      return knex('businesstype').insert({
-        id: '35b6db45-515c-4497-8888-3b1aea0c595b',
-        name: 'Foreign company'
-      })
-    })
-    .then(() => {
       return knex('title').insert({
         id: '35b6db3e-666c-4497-8020-3b1aea0c595b',
         name: 'Mr'
@@ -193,10 +166,11 @@ exports.seed = function (knex) {
         registered_address_county: 'LONDON',
         registered_address_postcode: 'SW6 3ER',
         registered_address_country: '4ed85f99-7e27-4041-ae7f-0440d2b36958',
-        business_type: '35b6db3e-515c-4497-8020-3b1aea0c595b',
+        business_type: 'Private Limited Company',
         sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
-        uk_region: '35b6db3e-515c-4497-8020-3b1aea0c5957'
+        uk_region: '35b6db3e-515c-4497-8020-3b1aea0c5957',
+        uk_based: true
       })
     })
     .then(() => { // company with contact
@@ -209,14 +183,15 @@ exports.seed = function (knex) {
         registered_address_county: 'LONDON',
         registered_address_postcode: 'EC2R 8DU',
         registered_address_country: '4ed85f99-7e27-4041-ae7f-0440d2b36958',
-        business_type: '35b6db3e-515c-4497-8020-3b1aea0c595b',
+        business_type: 'Private Limited Company',
         sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
         uk_region: '35b6db3e-515c-4497-8020-3b1aea0c5957',
         website: 'http://www.marriott.co.uk/',
         turnover_range: '35bbdb3e-515c-4497-8020-3b1aea0c595b',
         employee_range: '35b6db3e-515c-4497-8020-3b1aea0c595a',
-        headquarters: 'UK Headquarters'
+        headquarters: 'UK Headquarters',
+        uk_based: true
       })
     })
     .then(() => {
@@ -245,10 +220,11 @@ exports.seed = function (knex) {
         registered_address_county: 'Oxfordshire',
         registered_address_postcode: 'SN7 7HL',
         registered_address_country: '4ed85f99-7e27-4041-ae7f-0440d2b36958',
-        business_type: '35b6db3e-515c-4497-8020-3b1aea0c595b',
+        business_type: 'Private Limited Company',
         sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
-        uk_region: '35b6db3e-515c-4497-8020-3b1aea0c5957'
+        uk_region: '35b6db3e-515c-4497-8020-3b1aea0c5957',
+        uk_based: true
       })
     })
     .then(() => {
@@ -325,10 +301,11 @@ exports.seed = function (knex) {
         registered_address_county: 'Aberdeen',
         registered_address_postcode: 'AB12 7AZ',
         registered_address_country: '4ed85f99-7e27-4041-ae7f-0440d2b36958',
-        business_type: '98d14e94-5d95-e211-a939-e4115bead28a',
+        business_type: 'Private Limited Company',
         sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
-        uk_region: '35b6db3e-515c-4497-1111-3b1aea0c5957'
+        uk_region: '35b6db3e-515c-4497-1111-3b1aea0c5957',
+        uk_based: true
       })
     })
     .then(() => {
@@ -357,10 +334,11 @@ exports.seed = function (knex) {
         registered_address_county: 'Moscow',
         registered_address_postcode: '125047',
         registered_address_country: '6abbee91-7b85-49b8-a133-d59455dc2aad',
-        business_type: '98d14e94-5d95-e211-a939-e4115bead28a',
+        business_type: 'Company',
         sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
-        headquarters: 'European headquarters'
+        headquarters: 'European headquarters',
+        uk_based: false
       })
     })
     .then(() => {
@@ -390,11 +368,11 @@ exports.seed = function (knex) {
     .then(() => {
       return knex('companyinvestmentsummary').insert({
         id: 'bddc1331-fe3d-44d6-aecf-471c49f9a0c0',
-        investment_tier: "B - Top 300",
-        investment_account_manager: "35b6ff3e-515c-4497-8020-3b1aea0c5958",
-        client_relationship_manager: "360c19ee-dc20-4f72-bac8-e4054eef50b5",
-        ownership: "",
-        ownership_country: "Russia"
+        investment_tier: 'B - Top 300',
+        investment_account_manager: '35b6ff3e-515c-4497-8020-3b1aea0c5958',
+        client_relationship_manager: '360c19ee-dc20-4f72-bac8-e4054eef50b5',
+        ownership: '',
+        ownership_country: 'Russia'
       })
     })
     .then(() => {   // CDMS Only company with no CH data
@@ -405,10 +383,11 @@ exports.seed = function (knex) {
         registered_address_county: 'Hong Kong',
         registered_address_postcode: '1111',
         registered_address_country: '2cdcb25b-6fe3-4ada-b1be-81222e927cee',
-        business_type: '98d14e94-5d95-e211-a939-e4115bead28a',
+        business_type: 'Company',
         sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
-        headquarters: 'Asian headquarters'
+        headquarters: 'Asian headquarters',
+        uk_based: false
       })
     })
     .then(() => {
@@ -438,11 +417,11 @@ exports.seed = function (knex) {
     .then(() => {
       return knex('companyinvestmentsummary').insert({
         id: '6018122e-eb53-4dc7-a87a-52d4cb43a656',
-          investment_tier: "B - Top 300",
-          investment_account_manager: "35b6ff3e-515c-4497-8020-3b1aea0c5958",
-          client_relationship_manager: "360c19ee-dc20-4f72-bac8-e4054eef50b5",
-          ownership: "",
-          ownership_country: "Hong Kong"
+        investment_tier: 'B - Top 300',
+        investment_account_manager: '35b6ff3e-515c-4497-8020-3b1aea0c5958',
+        client_relationship_manager: '360c19ee-dc20-4f72-bac8-e4054eef50b5',
+        ownership: '',
+        ownership_country: 'Hong Kong'
       })
     })
     .then(() => {

@@ -3,7 +3,6 @@ function clear (knex) {
     knex('company').del(),
     knex('companieshouse').del(),
     knex('country').del(),
-    knex('businesstype').del(),
     knex('employeerange').del(),
     knex('turnoverrange').del(),
     knex('advisor').del(),
@@ -45,12 +44,6 @@ exports.seed = function (knex, Promise) {
       })
     })
     .then(() => {
-      return knex('businesstype').insert({
-        id: '35b6db3e-515c-4497-8020-3b1aea0c595b',
-        name: 'Private Limited Company'
-      })
-    })
-    .then(() => {
       return knex('country').insert({
         id: '35b6db3e-515c-4497-8020-3b1aea0c595d',
         name: 'United Kingdom'
@@ -81,7 +74,7 @@ exports.seed = function (knex, Promise) {
         registered_address_county: 'Berkshire',
         registered_address_postcode: 'FB1 1FB',
         registered_address_country: '35b6db3e-515c-4497-8020-3b1aea0c595d',
-        business_type: '35b6db3e-515c-4497-8020-3b1aea0c595b',
+        business_type: 'Private Limited Company',
         sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
         uk_region: '35b6db3e-515c-4497-8020-3b1aea0c5957'
@@ -97,7 +90,7 @@ exports.seed = function (knex, Promise) {
         registered_address_county: 'Berkshire',
         registered_address_postcode: 'FB1 1FB',
         registered_address_country: '35b6db3e-515c-4497-8020-3b1aea0c595d',
-        business_type: '35b6db3e-515c-4497-8020-3b1aea0c595b',
+        business_type: 'Private Limited Company',
         sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
         uk_region: '35b6db3e-515c-4497-8020-3b1aea0c5957'

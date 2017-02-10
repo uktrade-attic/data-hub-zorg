@@ -1,23 +1,25 @@
-/* global describe: true, beforeEach: true, afterEach: true, it:true, knex:true, chai: true, server: true */
+/* global describe: true, beforeEach: true, before: true, it:true, knex:true, chai: true, server: true, expect: true */
+const knexCleaner = require('knex-cleaner')
+
 describe('Company API Routes', () => {
+  before(function (done) {
+    knex.migrate.latest()
+    .then(() => {
+      done()
+    })
+  })
+
   beforeEach((done) => {
-    knex.migrate.rollback()
-      .then(() => {
-        return knex.migrate.latest()
-      })
-      .then(() => {
+    const options = {
+      mode: 'truncate',
+      ignoreTables: ['knex_migrations', 'knex_migrations_lock']
+    }
+
+    knexCleaner.clean(knex, options)
+      .then(function () {
         return knex.seed.run()
       })
-      .then(() => {
-        done()
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  })
-  afterEach((done) => {
-    knex.migrate.rollback()
-      .then(() => {
+      .then(function () {
         done()
       })
   })
