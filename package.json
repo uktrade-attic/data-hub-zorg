@@ -36,11 +36,13 @@
   },
   "scripts": {
     "start": "node --use-strict src/server.js",
-    "develop": "nodemon --use-strict src/app.js",
+    "develop": "nodemon --use-strict src/server.js",
     "test": "mocha --require test/common.js --ui bdd test/**/*.test.js",
     "lint": "npm run lint:js",
+    "fulldevstart": "npm run migrate && npm run seed && npm run develop",
     "lint:js": "eslint src/**/*.js",
     "migrate": "knex migrate:latest",
+    "seed": "knex seed:run",
     "heroku-postbuild": "knex migrate:latest && knex seed:run"
   }
 }
