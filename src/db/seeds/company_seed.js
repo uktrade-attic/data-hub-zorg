@@ -424,6 +424,43 @@ exports.seed = function (knex) {
         ownership_country: 'Hong Kong'
       })
     })
+    .then(() => {   // CDMS Only company with no CH data
+      return knex('company').insert({
+        id: '577172f2-e7ac-44eb-840a-cfd530564c71',
+        name: 'Marriott International Design & Construction Services, INC.',
+        registered_address_1: 'Suite 400 Wilmington',
+        registered_address_county: 'Delaware',
+        registered_address_postcode: '19808',
+        registered_address_country: '1cb43855-31f9-4cc6-a9a7-893ba5fb0328',
+        business_type: 'Company',
+        sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
+        account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
+        headquarters: 'USA',
+        uk_based: false
+      })
+    })
+    .then(() => {
+      return knex('investmentproject').insert({
+        id: 'ed6b6a8a-1b7f-467d-b13d-7d58e1fee842',
+        company: '577172f2-e7ac-44eb-840a-cfd530564c71',
+        name: 'New investment in UK or elsewhere',
+        value: 'Good',
+        state: 'Active',
+        land_date: new Date(2017, 5, 30),
+        open: true,
+        created_on: new Date()
+      })
+    })
+    .then(() => {
+      return knex('companyinvestmentsummary').insert({
+        id: '577172f2-e7ac-44eb-840a-cfd530564c71',
+        investment_tier: 'B - Top 300',
+        investment_account_manager: '35b6ff3e-515c-4497-8020-3b1aea0c5958',
+        client_relationship_manager: '360c19ee-dc20-4f72-bac8-e4054eef50b5',
+        ownership: '',
+        ownership_country: 'USA'
+      })
+    })
     .then(() => {
       console.log('Imported data -- calling create index')
       return ESIndex.createIndex()
