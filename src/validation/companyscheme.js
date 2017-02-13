@@ -20,7 +20,7 @@ module.exports = {
   'registered_address_2': {
     optional: true,
     isLength: {
-      options: [{ min: 2, max: 255 }],
+      options: [{ max: 255 }],
       errorMessage: 'Must be between 2 and 255 chars long' // Error message for the validator, takes precedent over parameter message
     },
     errorMessage: 'Invalid address'
