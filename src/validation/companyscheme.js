@@ -15,7 +15,7 @@ module.exports = {
       options: [{ max: 255 }],
       errorMessage: 'Must be between 2 and 255 chars long' // Error message for the validator, takes precedent over parameter message
     },
-    errorMessage: 'Invalid address'
+    errorMessage: 'Invalid address line'
   },
   'registered_address_2': {
     optional: true,
@@ -23,7 +23,7 @@ module.exports = {
       options: [{ max: 255 }],
       errorMessage: 'Must be between 2 and 255 chars long' // Error message for the validator, takes precedent over parameter message
     },
-    errorMessage: 'Invalid address'
+    errorMessage: 'Invalid address line'
   },
   'registered_address_town': {
     optional: true,
@@ -31,7 +31,7 @@ module.exports = {
       options: [{ max: 255 }],
       errorMessage: 'Must be between 2 and 10 chars long' // Error message for the validator, takes precedent over parameter message
     },
-    errorMessage: 'Invalid address'
+    errorMessage: 'Invalid town'
   },
   'registered_address_county': {
     optional: true,
@@ -47,6 +47,6 @@ module.exports = {
       options: [{ max: 10 }],
       errorMessage: 'Must be between 2 and 10 chars long' // Error message for the validator, takes precedent over parameter message
     },
-    errorMessage: 'Invalid address'
+    errorMessage: 'Invalid postcode'
   }
 }
