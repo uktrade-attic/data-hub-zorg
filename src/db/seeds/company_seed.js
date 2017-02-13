@@ -424,6 +424,22 @@ exports.seed = function (knex) {
         ownership_country: 'Hong Kong'
       })
     })
+    .then(() => {
+      return knex('contact').insert({
+        id: '8577db3e-515c-4497-8020-3b1aea0c59ff',
+        company: '6018122e-eb53-4dc7-a87a-52d4cb43a656',
+        title: '35b6db3e-666c-4497-8020-3b1aea0c595b',
+        first_name: 'John',
+        last_name: 'Green',
+        job_title: 'Director',
+        advisor: '35b6db3e-515c-4497-8020-3b1aea0c5958',
+        primary: false,
+        telephone_number: '7813 321123',
+        email: 'john@mhi.com',
+        address_same_as_company: true,
+        created_on: new Date()
+      })
+    })
     .then(() => {   // CDMS Only company with no CH data
       return knex('company').insert({
         id: '577172f2-e7ac-44eb-840a-cfd530564c71',
