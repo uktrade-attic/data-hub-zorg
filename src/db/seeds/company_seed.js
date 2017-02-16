@@ -38,6 +38,9 @@ function clear (knex) {
       return knex('sector').del()
     })
     .then(() => {
+      return knex('subsector').del()
+    })
+    .then(() => {
       return knex('title').del()
     })
     .then(() => {
@@ -65,7 +68,13 @@ exports.seed = function (knex) {
     })
     .then(() => {
       return knex('sector').insert({
-        id: '35b6db3e-515b-4497-8020-3b1aea0c5956',
+        id: '851572a8-aff6-4a13-bff5-4d4adcecb7f4',
+        name: 'Travel & Tourism'
+      })
+    })
+    .then(() => {
+      return knex('sector').insert({
+        id: '7d4c5ba8-cf69-49ff-b82b-4763edfe92f2',
         name: 'Office : Rental'
       })
     })
@@ -79,6 +88,27 @@ exports.seed = function (knex) {
       return knex('sector').insert({
         id: 'b122c9d2-5f95-e211-a939-e4115bead28a',
         name: 'Aerospace : Maintenance'
+      })
+    })
+    .then(() => {
+      return knex('subsector').insert({
+        id: '9e6d97ac-b39c-41a3-92c9-6d701dbfe317',
+        name: 'Hotels',
+        parent: '851572a8-aff6-4a13-bff5-4d4adcecb7f4'
+      })
+    })
+    .then(() => {
+      return knex('subsector').insert({
+        id: 'df6355bf-b44d-4616-8ae7-dec9574dc515',
+        name: 'Airlines',
+        parent: '851572a8-aff6-4a13-bff5-4d4adcecb7f4'
+      })
+    })
+    .then(() => {
+      return knex('subsector').insert({
+        id: '1db26120-9ae2-48b2-9b4e-f7c65835b468',
+        name: 'Cruises',
+        parent: '851572a8-aff6-4a13-bff5-4d4adcecb7f4'
       })
     })
     .then(() => {
