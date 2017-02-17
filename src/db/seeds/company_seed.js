@@ -63,31 +63,47 @@ exports.seed = function (knex) {
     .then(() => {
       return knex('sector').insert({
         id: '35b6db3e-515c-4497-8020-3b1aea0c5956',
-        name: 'Office : Cleaning Services'
+        name: 'Office'
+      })
+    })
+    .then(() => {
+      return knex('subsector').insert({
+        id: '7d4c5ba8-cf69-49ff-b82b-4763edfe92f2',
+        name: 'Rental',
+        parent: '35b6db3e-515c-4497-8020-3b1aea0c5956'
+      })
+    })
+    .then(() => {
+      return knex('subsector').insert({
+        id: '4950e488-bec0-42c8-b94f-477b229452be',
+        name: 'Cleaning Services',
+        parent: '35b6db3e-515c-4497-8020-3b1aea0c5956'
+      })
+    })
+    .then(() => {
+      return knex('sector').insert({
+        id: '3973d8b1-b544-44c1-9df7-db026092023b',
+        name: 'Aerospace'
+      })
+    })
+    .then(() => {
+      return knex('subsector').insert({
+        id: '66ad1077-db5c-46a7-8845-a711cbf2f6e2',
+        name: 'Maintenance',
+        parent: '3973d8b1-b544-44c1-9df7-db026092023b'
+      })
+    })
+    .then(() => {
+      return knex('subsector').insert({
+        id: 'e9e181d2-f6a0-e211-b972-e4115bead28a',
+        name: 'Component Manufacturing',
+        parent: '3973d8b1-b544-44c1-9df7-db026092023b'
       })
     })
     .then(() => {
       return knex('sector').insert({
         id: '851572a8-aff6-4a13-bff5-4d4adcecb7f4',
         name: 'Travel & Tourism'
-      })
-    })
-    .then(() => {
-      return knex('sector').insert({
-        id: '7d4c5ba8-cf69-49ff-b82b-4763edfe92f2',
-        name: 'Office : Rental'
-      })
-    })
-    .then(() => {
-      return knex('sector').insert({
-        id: 'e9e181d2-f6a0-e211-b972-e4115bead28a',
-        name: 'Aerospace : Component Manufacturing'
-      })
-    })
-    .then(() => {
-      return knex('sector').insert({
-        id: 'b122c9d2-5f95-e211-a939-e4115bead28a',
-        name: 'Aerospace : Maintenance'
       })
     })
     .then(() => {
@@ -109,6 +125,12 @@ exports.seed = function (knex) {
         id: '1db26120-9ae2-48b2-9b4e-f7c65835b468',
         name: 'Cruises',
         parent: '851572a8-aff6-4a13-bff5-4d4adcecb7f4'
+      })
+    })
+    .then(() => {
+      return knex('sector').insert({
+        id: '5a821d19-bb6b-491c-9edd-c8678faac35f',
+        name: 'Film Production'
       })
     })
     .then(() => {
