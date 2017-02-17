@@ -10,6 +10,7 @@ function clear (knex) {
     .then(() => {
       return knex('contact').del()
     })
+
     .then(() => {
       return knex('companyinvestmentsummary').del()
     })

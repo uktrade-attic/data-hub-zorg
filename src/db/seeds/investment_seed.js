@@ -6,7 +6,7 @@ console.log("########################## investment seed")
 
 function clear (knex) {
   return knex('referral').del()
-    .then(() => knex('business_activity').del)
+    .then(() => knex('business_activity').del())
     .then(() => console.log("deleted"))
 }
 
