@@ -16,6 +16,7 @@ function clear (knex) {
     .then(() => knex('fdi').del())
     .then(() => knex('nonfdi').del())
     .then(() => knex('business_activity').del())
+    .then(() => knex('investment_summary').del())
     .then(() => console.log("deleted"))
 }
 
