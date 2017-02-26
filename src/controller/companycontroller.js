@@ -113,11 +113,6 @@ function updateCompanyInvestmentSummary (req, res, next) {
   })
 }
 
-function createInvestmentProject(req, res, next) {
-  console.log(req.body)
-  res.status(200).json({complete: true})
-}
-
 function related (req, res, next) {
   const id = req.params.id
   const result = {}
@@ -143,7 +138,6 @@ router.get('/:id/contacts/', contacts)
 router.get('/:id/investmentprojects/', investmentProjects)
 router.get('/:id/investmentsummary/', getCompanyInvestmentSummary)
 router.post('/:id/investmentsummary/', updateCompanyInvestmentSummary)
-router.post('/:id/createproject', createInvestmentProject)
 router.get('/:id/related/', related)
 
 module.exports = { router }
