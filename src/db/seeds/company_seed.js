@@ -165,6 +165,12 @@ exports.seed = function (knex) {
       })
     })
     .then(() => {
+      return knex('advisor').insert({
+        id: '038b6067-8dc2-448a-a42a-1fc0f0fa6482',
+        name: 'Fred Jones'
+      })
+    })
+    .then(() => {
       return knex('turnoverrange').insert({
         id: '35bbdb3e-515c-4497-8020-3b1aea0c595b',
         name: '£6.7M-£33.5M'

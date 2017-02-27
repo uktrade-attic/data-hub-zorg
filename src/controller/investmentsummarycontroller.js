@@ -7,6 +7,9 @@ const investmentSummaryValidationSchema = require('../validation/investmentschem
 const router = express.Router()
 
 function post (req, res, next) {
+
+  console.log(req.body)
+
   req.checkBody(investmentSummaryValidationSchema)
   req.getValidationResult()
     .then((result) => {
@@ -22,6 +25,10 @@ function post (req, res, next) {
         })
         .then((investmentSummary) => {
           res.status(200).json(investmentSummary)
+        })
+        .catch((error) => {
+          winston.error(error)
+          next(error)
         })
     })
     .catch((error) => {
