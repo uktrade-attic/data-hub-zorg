@@ -7,9 +7,6 @@ const investmentSummaryValidationSchema = require('../validation/investmentschem
 const router = express.Router()
 
 function post (req, res, next) {
-
-  console.log(req.body)
-
   req.checkBody(investmentSummaryValidationSchema)
   req.getValidationResult()
     .then((result) => {
@@ -21,7 +18,7 @@ function post (req, res, next) {
       investmentSummaryToAdd.id = generateUUID()
       investmentSummaryRepository.addInvestmentSummary(investmentSummaryToAdd)
         .then((id) => {
-          return investmentSummaryRepository.getInvestmentSummary(id)
+          return id
         })
         .then((investmentSummary) => {
           res.status(200).json(investmentSummary)
@@ -37,6 +34,14 @@ function post (req, res, next) {
     })
 }
 
+function get(req, res, next) {
+  investmentSummaryRepository.getInvestmentSummary(req.params.id)
+    .then((details) => res.json(details))
+
+}
+
 router.post('/investment/:id/createproject', post)
+router.get('/investment/:id/projectdetails', get)
+
 
 module.exports = { router }
