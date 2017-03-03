@@ -3,6 +3,10 @@ const subrefs = require('../../../data/subreferral.js').subreferral
 const fdi = require('../../../data/fdi.js').fdi
 const nonfdi = require('../../../data/nonfdi.js').nonfdi
 const clients = require('../../../data/client_contacts.js').clients
+const sector = require('../../../data/sector.js').sector
+const subsector = require('../../../data/subsector.js').subsector
+
+
 
 const path = require('path')
 const ImportCH = require('../importch')
@@ -94,77 +98,10 @@ exports.seed = function (knex) {
       return knex('business_activity').insert(business_activity)
     })
     .then(() => {
-      return knex('sector').insert({
-        id: '35b6db3e-515c-4497-8020-3b1aea0c5956',
-        name: 'Office'
-      })
+      return knex('sector').insert(sector)
     })
     .then(() => {
-      return knex('subsector').insert({
-        id: '7d4c5ba8-cf69-49ff-b82b-4763edfe92f2',
-        name: 'Rental',
-        parent: '35b6db3e-515c-4497-8020-3b1aea0c5956'
-      })
-    })
-    .then(() => {
-      return knex('subsector').insert({
-        id: '4950e488-bec0-42c8-b94f-477b229452be',
-        name: 'Cleaning Services',
-        parent: '35b6db3e-515c-4497-8020-3b1aea0c5956'
-      })
-    })
-    .then(() => {
-      return knex('sector').insert({
-        id: '3973d8b1-b544-44c1-9df7-db026092023b',
-        name: 'Aerospace'
-      })
-    })
-    .then(() => {
-      return knex('subsector').insert({
-        id: '66ad1077-db5c-46a7-8845-a711cbf2f6e2',
-        name: 'Maintenance',
-        parent: '3973d8b1-b544-44c1-9df7-db026092023b'
-      })
-    })
-    .then(() => {
-      return knex('subsector').insert({
-        id: 'e9e181d2-f6a0-e211-b972-e4115bead28a',
-        name: 'Component Manufacturing',
-        parent: '3973d8b1-b544-44c1-9df7-db026092023b'
-      })
-    })
-    .then(() => {
-      return knex('sector').insert({
-        id: '851572a8-aff6-4a13-bff5-4d4adcecb7f4',
-        name: 'Travel & Tourism'
-      })
-    })
-    .then(() => {
-      return knex('subsector').insert({
-        id: '9e6d97ac-b39c-41a3-92c9-6d701dbfe317',
-        name: 'Hotels',
-        parent: '851572a8-aff6-4a13-bff5-4d4adcecb7f4'
-      })
-    })
-    .then(() => {
-      return knex('subsector').insert({
-        id: 'df6355bf-b44d-4616-8ae7-dec9574dc515',
-        name: 'Airlines',
-        parent: '851572a8-aff6-4a13-bff5-4d4adcecb7f4'
-      })
-    })
-    .then(() => {
-      return knex('subsector').insert({
-        id: '1db26120-9ae2-48b2-9b4e-f7c65835b468',
-        name: 'Cruises',
-        parent: '851572a8-aff6-4a13-bff5-4d4adcecb7f4'
-      })
-    })
-    .then(() => {
-      return knex('sector').insert({
-        id: '5a821d19-bb6b-491c-9edd-c8678faac35f',
-        name: 'Film Production'
-      })
+      return knex('subsector').insert(subsector)
     })
     .then(() => {
       return knex('region').insert({
@@ -258,7 +195,7 @@ exports.seed = function (knex) {
         registered_address_postcode: 'SW6 3ER',
         registered_address_country: '4ed85f99-7e27-4041-ae7f-0440d2b36958',
         business_type: 'Private Limited Company',
-        sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
+        sector: '44329c18-6095-e211-a939-e4115bead28a',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
         uk_region: '35b6db3e-515c-4497-8020-3b1aea0c5957',
         uk_based: true
@@ -275,7 +212,7 @@ exports.seed = function (knex) {
         registered_address_postcode: 'EC2R 8DU',
         registered_address_country: '4ed85f99-7e27-4041-ae7f-0440d2b36958',
         business_type: 'Private Limited Company',
-        sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
+        sector: 'a938cecc-5f95-e211-a939-e4115bead28a',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
         uk_region: '35b6db3e-515c-4497-8020-3b1aea0c5957',
         website: 'http://www.marriott.co.uk/',
@@ -312,7 +249,7 @@ exports.seed = function (knex) {
         registered_address_postcode: 'SN7 7HL',
         registered_address_country: '4ed85f99-7e27-4041-ae7f-0440d2b36958',
         business_type: 'Private Limited Company',
-        sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
+        sector: '9f38cecc-5f95-e211-a939-e4115bead28a',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
         uk_region: '35b6db3e-515c-4497-8020-3b1aea0c5957',
         uk_based: true
@@ -393,7 +330,7 @@ exports.seed = function (knex) {
         registered_address_postcode: 'AB12 7AZ',
         registered_address_country: '4ed85f99-7e27-4041-ae7f-0440d2b36958',
         business_type: 'Private Limited Company',
-        sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
+        sector: 'a938cecc-5f95-e211-a939-e4115bead28a',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
         uk_region: '35b6db3e-515c-4497-1111-3b1aea0c5957',
         uk_based: true
@@ -426,7 +363,7 @@ exports.seed = function (knex) {
         registered_address_postcode: '125047',
         registered_address_country: '6abbee91-7b85-49b8-a133-d59455dc2aad',
         business_type: 'Company',
-        sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
+        sector: 'a938cecc-5f95-e211-a939-e4115bead28a',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
         headquarters: 'European headquarters',
         uk_based: false
@@ -475,7 +412,7 @@ exports.seed = function (knex) {
         registered_address_postcode: '1111',
         registered_address_country: '2cdcb25b-6fe3-4ada-b1be-81222e927cee',
         business_type: 'Company',
-        sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
+        sector: 'a938cecc-5f95-e211-a939-e4115bead28a',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
         headquarters: 'Asian headquarters',
         uk_based: false
@@ -540,7 +477,7 @@ exports.seed = function (knex) {
         registered_address_postcode: '19808',
         registered_address_country: '1cb43855-31f9-4cc6-a9a7-893ba5fb0328',
         business_type: 'Company',
-        sector: '35b6db3e-515c-4497-8020-3b1aea0c5956',
+        sector: 'a938cecc-5f95-e211-a939-e4115bead28a',
         account_manager: '35b6db3e-515c-4497-8020-3b1aea0c5958',
         headquarters: 'USA',
         uk_based: false
