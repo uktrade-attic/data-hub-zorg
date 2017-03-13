@@ -506,6 +506,33 @@ exports.seed = function (knex) {
       })
     })
     .then(() => {
+      return knex('investment_summary').insert({
+        id: 'fe4ddf33-6a2b-41b0-8545-babfaaff898b',
+        commitment_to_invest: null,
+        business_activity: 'da179578-c182-4c95-abee-daaa8fa9fb90',
+        nda: true,
+        canshare: null,
+        investment_source: '6018122e-eb53-4dc7-a87a-52d4cb43a656',
+        nonfdi_type: null,
+        fdi: null,
+        nonfdi: null,
+        maynotshare: null,
+        referral_source_manager: null,
+        referral_source_main: '0ed5b73a-a1b5-4dd8-a96e-8754db3883fa',
+        anonymous_description : null,
+        client_relationship_manager : null,
+        subsector : null,
+        client_contact : '760c3952-e74c-42d5-addc-cbb4cf4f14ef',
+        project_id : 'P-60184659',
+        investment_recipient : '45b6db3e-515c-4497-8020-3b1aea0c59ff',
+        referral_source_sub : null,
+        fdi_type : 'fc9c5cdb-84df-4b23-9489-f33f5cdc5307',
+        project_description : 'Building a new hotel in Manchester',
+        estimated_land_date : '2018-05-01',
+        sector : 'af959812-6095-e211-a939-e4115bead28a'
+      })
+    })
+    .then(() => {
       console.log('Imported data -- calling create index')
       return ESIndex.createIndex()
     })

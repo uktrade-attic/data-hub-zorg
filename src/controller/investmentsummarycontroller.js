@@ -43,5 +43,4 @@ function get(req, res, next) {
 router.post('/investment/:id/createproject', post)
 router.get('/investment/:id/projectdetails', get)
 
-
 module.exports = { router }
