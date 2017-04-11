@@ -5,7 +5,9 @@ const nonfdi = require('../../../data/nonfdi.js').nonfdi
 const clients = require('../../../data/client_contacts.js').clients
 const sector = require('../../../data/sector.js').sector
 const subsector = require('../../../data/subsector.js').subsector
-
+const {
+  regions, businessType, employeeRange, teams, interactionTypes, serviceDeliveryStatus, events, turnovers
+} = require('../../../data/moremeta')
 
 
 const path = require('path')
@@ -70,6 +72,31 @@ function clear (knex) {
     .then(() => {
       return knex('title').del()
     })
+
+    .then(() => {
+      return knex('uk-region').del()
+    })
+    .then(() => {
+      return knex('employee-range').del()
+    })
+    .then(() => {
+      return knex('business-type').del()
+    })
+    .then(() => {
+      return knex('team').del()
+    })
+    .then(() => {
+      return knex('interaction-type').del()
+    })
+    .then(() => {
+      return knex('event').del()
+    })
+    .then(() => {
+      return knex('service-delivery-status').del()
+    })
+    .then(() => {
+      return knex('turnover').del()
+    })
     .then(() => console.log("deleted"))
 }
 
@@ -77,6 +104,7 @@ exports.seed = function (knex) {
 
   const csvPath = path.join(__dirname, '..', '..', '..', 'data', 'marriot_ch.csv')
   const chrecords = ImportCH.parseFile(csvPath)
+
 
   return clear(knex)
     .then(() => {
@@ -183,6 +211,30 @@ exports.seed = function (knex) {
     })
     .then(() => {
       return knex('companieshouse').insert(chrecords)
+    })
+    .then(() => {
+      return knex('uk-region').insert(regions)
+    })
+    .then(() => {
+      return knex('employee-range').insert(employeeRange)
+    })
+    .then(() => {
+      return knex('business-type').insert(businessType)
+    })
+    .then(() => {
+      return knex('team').insert(teams)
+    })
+    .then(() => {
+      return knex('interaction-type').insert(interactionTypes)
+    })
+    .then(() => {
+      return knex('event').insert(events)
+    })
+    .then(() => {
+      return knex('service-delivery-status').insert(serviceDeliveryStatus)
+    })
+    .then(() => {
+      return knex('turnover').insert(turnovers)
     })
     .then(() => { // Company with no contacts or anything
       return knex('company').insert({
