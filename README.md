@@ -14,11 +14,11 @@ As such the application requires node, postgres and elasticsearch.
 ## Docker/Docker Compose
 ### API Server Only
 
-If you don't want to install all the various componets you can simple use docker-compose to 
-bring up the service and then use a method such as 'docker-compose container exec bash' to 
+If you don't want to install all the various componets you can simple use docker-compose to
+bring up the service and then use a method such as 'docker-compose container exec bash' to
 enter the container and run migrations etc.
 
-To start the backend using docker compose make sure you have docker and  docker compose 
+To start the backend using docker compose make sure you have docker and  docker compose
 installed and then simply:
 
 ```docker-compose up```
@@ -34,7 +34,7 @@ This will:
 You can now access the API via [http://localhost:3010/](http://localhost:3010/)
 
 *note* If you make changes to the DB migration scheme or seed data files you will either
-need to go into the api server container and use knex to apply these or destroy the docker 
+need to go into the api server container and use knex to apply these or destroy the docker
 compose containers and start it up again.
 
 ### Full stack, including frontend
@@ -66,7 +66,7 @@ you have an elastic search instance running and a Postgresql database.
 
 Run the server in either production mode or develop mode
 
-  
+
 #### Production
 Builds static assets and runs a server using node
 
@@ -83,6 +83,35 @@ code will result in the server autorestarting. The server will run with the node
 ```
 npm run develop
 ```
+
+#### Docker container installation
+Examples of how to install docker containers without using docker compose
+
+##### Postgres
+```docker run --name zorg-postgres -p 5432:5432 -e POSTGRES_DB=investment -e POSTGRES_USER=datahub -e POSTGRES_PASSWORD=password -d postgres```
+
+##### Redis
+```docker run --name zorg-redis -p 6379:6379 -d redis```
+
+##### Elasticsearch
+```docker run --name zorg-elasticsearch -d -p 9200:9200 -p 9300:9300 --name zorg-elasticsearch jeanberu/elasticsearch-head```
+
+#### Restarting Docker containers
+run the following command if you want to restart containers (i.e. if for instance you restart you're machine)
+
+```docker restart zorg-postgres zorg-redis zorg-elasticsearch```
+
+#### Running Knex data migrations
+
+After installing/restarting the containers you will need to run the following knex commands (you may need to run knex like this: ```./node_modules/.bin/knex``` if you don't have knex installed globally )
+
+```knex migrate:latest```
+
+followed by:
+
+```knex seed:run```
+
+You should now have data to run your local instance of the project
 
 ### Configuration
 You must provide some basic configation to the server via environment variables. Set the
@@ -101,16 +130,16 @@ The package.json file includes a number of useful scripts for other tasks such a
 - lint: Lint both SASS and JS to make sure it conforms to rules
 
 ## Making changes
-When working on a new feature the convention is to follow 
+When working on a new feature the convention is to follow
 [Github Flow](https://guides.github.com/introduction/flow/).
-Branch from master and work on changes in your branch. Once you are happy the feature is ready then make 
-sure you have linted the code and ran the tests. Make sure your commits don't 
-contain extranous entries (such as wip) using rebase interactive and create a pull request. The 
-pull request title should briefly say what the change is, and the description describe how you did the change 
+Branch from master and work on changes in your branch. Once you are happy the feature is ready then make
+sure you have linted the code and ran the tests. Make sure your commits don't
+contain extranous entries (such as wip) using rebase interactive and create a pull request. The
+pull request title should briefly say what the change is, and the description describe how you did the change
 and why you chose to do it the way you did.
 
-Once a pull request is made it will be tested using [CircleCI](https://circleci.com/) and, if successful, 
-deployed to a heroku instance. Links to the Circle build and deployed address will be 
+Once a pull request is made it will be tested using [CircleCI](https://circleci.com/) and, if successful,
+deployed to a heroku instance. Links to the Circle build and deployed address will be
 shown in the github pull request.
 
 When a pull request is approved it can be merged to master.
